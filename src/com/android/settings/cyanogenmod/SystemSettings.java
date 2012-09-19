@@ -37,6 +37,9 @@ import android.view.WindowManagerGlobal;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class SystemSettings extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
     private static final String TAG = "SystemSettings";
 
@@ -274,5 +277,17 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
         if (mExpandedDesktopPref != null && summary != -1) {
             mExpandedDesktopPref.setSummary(res.getString(summary));
         }
+    }
+
+    public boolean onPreferenceChange(Preference preference, Object objValue) {
+        if (preference == mNavButtonsHeight) {
+            int statusNavButtonsHeight = Integer.valueOf((String) objValue);
+            int index = mNavButtonsHeight.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.NAV_BUTTONS_HEIGHT, statusNavButtonsHeight);
+            mNavButtonsHeight.setSummary(mNavButtonsHeight.getEntries()[index]);
+            return true;
+        }
+        return false;
     }
 }
