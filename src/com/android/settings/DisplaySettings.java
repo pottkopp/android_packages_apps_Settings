@@ -164,13 +164,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             }
         }
 
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ContentResolver resolver = getActivity().getContentResolver();
-
         mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
         updateCustomLabelTextSummary();
 
