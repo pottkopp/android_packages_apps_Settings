@@ -59,6 +59,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
     private static final String KEY_EXPANDED_DESKTOP = "expanded_desktop";
     private static final String KEY_EXPANDED_DESKTOP_NO_NAVBAR = "expanded_desktop_no_navbar";
     private static final String KEY_FULLSCREEN_KEYBOARD = "fullscreen_keyboard";
+    private static final String KEY_LOW_BATTERY_WARNING_POLICY = "pref_low_battery_warning_policy";
 
     private PreferenceScreen mNotificationPulse;
     private PreferenceScreen mBatteryPulse;
@@ -66,6 +67,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
     private ListPreference mExpandedDesktopPref;
     private CheckBoxPreference mExpandedDesktopNoNavbarPref;
     private CheckBoxPreference mFullscreenKeyboard;
+    private ListPreference mLowBatteryWarning;
 
     private ListPreference mNavigationBarHeight;
     private boolean mIsPrimary;
@@ -189,6 +191,14 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
         mFullscreenKeyboard = (CheckBoxPreference) findPreference(KEY_FULLSCREEN_KEYBOARD);
         mFullscreenKeyboard.setOnPreferenceChangeListener(this);
         mFullscreenKeyboard.setChecked(statusFullscreenKeyboard > 0);
+
+        mLowBatteryWarning = (ListPreference) findPreference(KEY_LOW_BATTERY_WARNING_POLICY);
+        int lowBatteryWarning = Settings.System.getInt(getActivity().getContentResolver(),
+                                    Settings.System.POWER_UI_LOW_BATTERY_WARNING_POLICY, 0);
+        mLowBatteryWarning.setValue(String.valueOf(lowBatteryWarning));
+        mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntry());
+        mLowBatteryWarning.setOnPreferenceChangeListener(this); 
+
     }
 
     @Override
@@ -235,7 +245,15 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
             Settings.System.putBoolean(getActivity().getApplicationContext().getContentResolver(),
                         Settings.System.FULLSCREEN_KEYBOARD, value);
             return true;
-        }
+        } else if (preference == mLowBatteryWarning) {
+            int lowBatteryWarning = Integer.valueOf((String) objValue);
+            int index = mLowBatteryWarning.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.POWER_UI_LOW_BATTERY_WARNING_POLICY,
+                    lowBatteryWarning);
+            mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntries()[index]);
+            return true;
+        } 
 
         return false;
     }
