@@ -1124,6 +1124,13 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="popups_title">Allow floating windows</string>
     <string name="popups_summary">Controls whether you want floating windows from notification panel</string>
 
+    <!-- Breathing Notifications -->
+    <string name="status_bar_breathing_notifs_title">Breathing Notifications</string>
+    <string name="mms_breath">Breathing SMS</string>
+    <string name="mms_breath_summary">Will give your sms notifications a breathing effect on the statusbar</string>
+    <string name="missed_call_breath">Breathing Missed Call</string>
+    <string name="missed_call_breath_summary">Will give your missed call notifications a breathing effect on the statusbar</string> 
+
     <!-- finnqBuilds ADDITIONS START -->
 
     <!-- Settings Group: NavigationBar -->
