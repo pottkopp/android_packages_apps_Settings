@@ -1044,6 +1044,9 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="fullscreen_statusbar_timeout_title">Fullscreen Statusbar Timeout</string>
     <string name="fullscreen_statusbar_timeout_summary">Timeout for Fullscreen Statusbar</string> 
 
+    <!-- Permissions Management -->
+    <string name="permissions_settings_title">Permissions</string> 
+
     <!-- finnqBuilds ADDITIONS START -->
 
     <!-- Settings Group: NavigationBar -->
