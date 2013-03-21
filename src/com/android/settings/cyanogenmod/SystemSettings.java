@@ -66,6 +66,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
     private static final String KEY_MISSED_CALL_BREATH = "missed_call_breath";
     private static final String KEY_SCREEN_ON_NOTIFICATION_LED = "screen_on_notification_led";
     private static final String KEY_CLEAR_RECENTS_POSITION = "clear_recents_position";
+    private static final String KEY_USE_ALT_RESOLVER = "use_alt_resolver";
 
     private PreferenceScreen mNotificationPulse;
     private PreferenceScreen mBatteryPulse;
@@ -78,6 +79,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
     private CheckBoxPreference mMissedCallBreath;
     private CheckBoxPreference mScreenOnNotificationLed;
     private ListPreference mClearPosition;
+    private CheckBoxPreference mUseAltResolver;
 
     private ListPreference mNavigationBarHeight;
     private boolean mIsPrimary;
@@ -232,6 +234,10 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
         mClearPosition.setSummary(mClearPosition.getEntry());
         mClearPosition.setOnPreferenceChangeListener(this);
 
+        mUseAltResolver = (CheckBoxPreference) findPreference(KEY_USE_ALT_RESOLVER);
+        mUseAltResolver.setChecked(Settings.System.getBoolean(getActivity().getContentResolver(),
+                Settings.System.ACTIVITY_RESOLVER_USE_ALT, false)); 
+
     }
 
     @Override
@@ -315,6 +321,11 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
                     Settings.System.SCREEN_ON_NOTIFICATION_LED,
                     mScreenOnNotificationLed.isChecked() ? 1 : 0);
 
+        } else if (preference == mUseAltResolver) {
+            Settings.System.putBoolean(getActivity().getContentResolver(),
+                    Settings.System.ACTIVITY_RESOLVER_USE_ALT,
+                    mUseAltResolver.isChecked());
+            return true; 
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     } 
