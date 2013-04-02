@@ -946,6 +946,15 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <!-- finnqBuilds ADDITIONS START -->
 
+    <!-- Settings Group: NavigationBar -->
+    <string name="navigation_bar_category">NavigationBar</string>
+
+    <!-- Settings Group: StatusBar -->
+    <string name="status_bar_category">StatusBar</string>
+
+    <!-- Settings Group: LEDs -->
+    <string name="led_settings_title">Notification LED</string> 
+
     <!-- Statusbar | Battery -->
     <string name="battery_icon">Battery icon style</string>
     <string name="battery_not_title">Battery icon in notifications</string>
@@ -962,7 +971,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="dialog_color_picker">Color Picker</string>
     <string name="press_color_to_apply">Press on Color to apply</string>
     <string name="arrow_right">→</string>
-    <string name="arrow_down">↓</string>
+  <string name="arrow_down">↓</string>
     <string name="hex">Hex:</string>
     <string name="hex_hint">#FF000000</string>
     <string name="set">Set</string>
