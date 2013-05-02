@@ -991,6 +991,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <!-- Sound settings, power notifications label for ringtone == none -->
     <string name="power_notifications_ringtone_silent">Silent</string>
 
+    <!-- Auto-Hide Status Bar -->
+    <string name="auto_hide_statusbar">Auto Hide statusbar</string>
+    <string name="auto_hide_statusbar_summary">Statusbar hides itself when there are no notifications</string>
+
     <!-- finnqBuilds ADDITIONS START -->
 
     <!-- Settings Group: NavigationBar -->
