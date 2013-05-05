@@ -16,6 +16,8 @@
 
 package com.android.settings.profiles;
 
+import static com.android.internal.util.cm.QSUtils.deviceSupportsNfc;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -99,6 +101,9 @@ public class ProfileConfig extends SettingsPreferenceFragment
         mConnections.add(new ConnectionItem(ConnectionSettings.PROFILE_CONNECTION_WIFIAP, getString(R.string.toggleWifiAp)));
         if (WimaxHelper.isWimaxSupported(getActivity())) {
             mConnections.add(new ConnectionItem(ConnectionSettings.PROFILE_CONNECTION_WIMAX, getString(R.string.toggleWimax)));
+        }
+        if (deviceSupportsNfc(getActivity())) {
+            mConnections.add(new ConnectionItem(ConnectionSettings.PROFILE_CONNECTION_NFC, getString(R.string.toggleNfc)));
         }
 
         addPreferencesFromResource(R.xml.profile_config);
