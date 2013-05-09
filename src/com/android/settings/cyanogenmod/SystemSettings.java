@@ -65,6 +65,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
     private static final String KEY_MMS_BREATH = "mms_breath";
     private static final String KEY_MISSED_CALL_BREATH = "missed_call_breath";
     private static final String KEY_SCREEN_ON_NOTIFICATION_LED = "screen_on_notification_led";
+    private static final String KEY_CLEAR_RECENTS_POSITION = "clear_recents_position";
 
     private PreferenceScreen mNotificationPulse;
     private PreferenceScreen mBatteryPulse;
@@ -76,6 +77,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
     private CheckBoxPreference mMMSBreath;
     private CheckBoxPreference mMissedCallBreath;
     private CheckBoxPreference mScreenOnNotificationLed;
+    private ListPreference mClearPosition;
 
     private ListPreference mNavigationBarHeight;
     private boolean mIsPrimary;
@@ -223,6 +225,13 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
         mScreenOnNotificationLed.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.SCREEN_ON_NOTIFICATION_LED, 0) == 1);
 
+        mClearPosition = (ListPreference) findPreference(KEY_CLEAR_RECENTS_POSITION);
+        int ClearSide = Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.CLEAR_RECENTS_POSITION, 0);
+        mClearPosition.setValue(String.valueOf(ClearSide));
+        mClearPosition.setSummary(mClearPosition.getEntry());
+        mClearPosition.setOnPreferenceChangeListener(this);
+
     }
 
     @Override
@@ -287,6 +296,13 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
             Settings.System.putBoolean(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.MISSED_CALL_BREATH, value);
             return true;
+        } else if (preference == mClearPosition) {
+            int side = Integer.valueOf((String) objValue);
+            int index = mClearPosition.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.CLEAR_RECENTS_POSITION, side);
+            mClearPosition.setSummary(mClearPosition.getEntries()[index]);
+            return true; 
         }
 
         return false;

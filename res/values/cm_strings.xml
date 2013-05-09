@@ -1224,6 +1224,11 @@ your apps faster.</string>
     <string name="ram_bar_color_disabled">Disabled</string>
     <string name="ram_bar_button_reset">Reset colors</string> 
 
+    <!-- Clear Recents position -->
+    <string name="clear_recents_position_title">Clear recents position</string>
+    <string name="clear_recents_position_left">Left</string>
+    <string name="clear_recents_position_right">Right</string> 
+
     <!-- finnqBuilds ADDITIONS START -->
 
     <string name="arrow_right">→</string>
