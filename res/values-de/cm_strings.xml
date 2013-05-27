@@ -559,12 +559,27 @@
     <string name="navigation_bar_height_43">43dp</string>
     <string name="navigation_bar_height_42">42dp</string>
     <string name="navigation_bar_height_41">41dp</string>
-    <string name="navigation_bar_height_40">40dp</string>
+    <string name="navigation_bar_height_40">40dp (klein)</string>
     <string name="navigation_bar_height_39">39dp</string>
     <string name="navigation_bar_height_38">38dp</string>
     <string name="navigation_bar_height_37">37dp</string>
     <string name="navigation_bar_height_36">36dp</string>
     <string name="navigation_bar_height_35">35dp</string>
+    <string name="navigation_bar_height_34">34dp</string>
+    <string name="navigation_bar_height_33">33dp</string>
+    <string name="navigation_bar_height_32">32dp (sehr klein)</string>
+    <string name="navigation_bar_height_31">31dp</string>
+    <string name="navigation_bar_height_30">30dp</string>
+    <string name="navigation_bar_height_29">29dp</string>
+    <string name="navigation_bar_height_28">28dp</string>
+    <string name="navigation_bar_height_27">27dp</string>
+    <string name="navigation_bar_height_26">26dp</string>
+    <string name="navigation_bar_height_25">25dp</string>
+    <string name="navigation_bar_height_24">24dp (winzig)</string>
+    <string name="navigation_bar_height_23">23dp</string>
+    <string name="navigation_bar_height_22">22dp</string>
+    <string name="navigation_bar_height_21">21dp</string>
+    <string name="navigation_bar_height_20">20dp</string>
 
     <!-- Maximize lock screen widgets -->
     <string name="lockscreen_maximize_widgets_title">Widgets maximieren</string>
