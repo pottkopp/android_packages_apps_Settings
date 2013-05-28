@@ -58,12 +58,14 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
     private static final String KEY_PIE_CONTROL = "pie_control";
     private static final String KEY_EXPANDED_DESKTOP = "expanded_desktop";
     private static final String KEY_EXPANDED_DESKTOP_NO_NAVBAR = "expanded_desktop_no_navbar";
+    private static final String KEY_FULLSCREEN_KEYBOARD = "fullscreen_keyboard";
 
     private PreferenceScreen mNotificationPulse;
     private PreferenceScreen mBatteryPulse;
     private PreferenceScreen mPieControl;
     private ListPreference mExpandedDesktopPref;
     private CheckBoxPreference mExpandedDesktopNoNavbarPref;
+    private CheckBoxPreference mFullscreenKeyboard;
 
     private ListPreference mNavigationBarHeight;
     private boolean mIsPrimary;
@@ -180,6 +182,13 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
 
         // Don't display the lock clock preference if its not installed
         removePreferenceIfPackageNotInstalled(findPreference(KEY_LOCK_CLOCK));
+
+        int statusFullscreenKeyboard = Settings.System.getInt(getContentResolver(),
+                Settings.System.FULLSCREEN_KEYBOARD, 1);
+
+        mFullscreenKeyboard = (CheckBoxPreference) findPreference(KEY_FULLSCREEN_KEYBOARD);
+        mFullscreenKeyboard.setOnPreferenceChangeListener(this);
+        mFullscreenKeyboard.setChecked(statusFullscreenKeyboard > 0);
     }
 
     @Override
@@ -220,6 +229,10 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.NAVIGATION_BAR_HEIGHT, statusNavigationBarHeight);
             mNavigationBarHeight.setSummary(mNavigationBarHeight.getEntries()[index]);
+            return true;
+        } else if (preference == mFullscreenKeyboard) {
+            Settings.System.putInt(getActivity().getContentResolver(), Settings.System.FULLSCREEN_KEYBOARD,
+                mFullscreenKeyboard.isChecked() ? 1 : 0);
             return true;
         }
 
