@@ -1038,6 +1038,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="fullscreen_keyboard">Disable fullscreen keyboard</string>
     <string name="fullscreen_keyboard_summary">Will allow you to see the normal portrait input fields while in landscape mode.</string>
 
+    <!-- Fullscreen Status Bar -->
+    <string name="fullscreen_statusbar_title">Fullscreen Statusbar</string>
+    <string name="fullscreen_statusbar_summary">Swiping down from the top of full screen apps shows status bar for 10 seconds.</string> 
+
     <!-- finnqBuilds ADDITIONS START -->
 
     <!-- Settings Group: NavigationBar -->

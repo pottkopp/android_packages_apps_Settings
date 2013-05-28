@@ -50,6 +50,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private static final String STATUS_BAR_SIGNAL = "status_bar_signal";
     private static final String STATUS_BAR_NOTIF_COUNT = "status_bar_notif_count";
     private static final String STATUS_BAR_CATEGORY_GENERAL = "status_bar_general";
+    private static final String PREF_FULLSCREEN_STATUSBAR = "fullscreen_statusbar";
     private static final String PREF_ENABLE = "clock_style";
     private static final String PREF_BATT_BAR = "battery_bar_list";
     private static final String PREF_BATT_BAR_STYLE = "battery_bar_style";
@@ -74,6 +75,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private PreferenceCategory mPrefCategoryGeneral;
     private ColorPickerPreference mBatteryBarColor;
     private CheckBoxPreference mStatusBarAutoHide; 
+    private CheckBoxPreference mFullScreenStatusBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -178,7 +180,11 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
 
         mStatusBarAutoHide = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_AUTO_HIDE);
         mStatusBarAutoHide.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                                                Settings.System.AUTO_HIDE_STATUSBAR, 0) == 1)); 
+                Settings.System.AUTO_HIDE_STATUSBAR, 0) == 1));
+
+        mFullScreenStatusBar = (CheckBoxPreference)findPreference(PREF_FULLSCREEN_STATUSBAR);
+        mFullScreenStatusBar.setChecked(Settings.System.getBoolean(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.FULLSCREEN_STATUSBAR, true)); 
 
 	mCircleColorReset = (Preference) findPreference(PREF_CIRCLE_COLOR_RESET);
         if (Settings.System.getInt(getActivity().getContentResolver(),
@@ -326,6 +332,11 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             value = mStatusBarAutoHide.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.AUTO_HIDE_STATUSBAR, value ? 1 : 0);
+            return true; 
+        } else if (preference == mFullScreenStatusBar) {
+            value = mFullScreenStatusBar.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.FULLSCREEN_STATUSBAR, value ? 1 : 0);
             return true; 
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
