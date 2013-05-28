@@ -231,8 +231,9 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
             mNavigationBarHeight.setSummary(mNavigationBarHeight.getEntries()[index]);
             return true;
         } else if (preference == mFullscreenKeyboard) {
-            Settings.System.putInt(getActivity().getContentResolver(), Settings.System.FULLSCREEN_KEYBOARD,
-                mFullscreenKeyboard.isChecked() ? 1 : 0);
+            boolean value = (Boolean) objValue;
+            Settings.System.putBoolean(getActivity().getApplicationContext().getContentResolver(),
+                        Settings.System.FULLSCREEN_KEYBOARD, value);
             return true;
         }
 
