@@ -51,6 +51,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private static final String STATUS_BAR_NOTIF_COUNT = "status_bar_notif_count";
     private static final String STATUS_BAR_CATEGORY_GENERAL = "status_bar_general";
     private static final String PREF_FULLSCREEN_STATUSBAR = "fullscreen_statusbar";
+    private static final String FREF_FULLSCREEN_STATUSBAR_TIMEOUT = "fullscreen_statusbar_timeout"; 
     private static final String PREF_ENABLE = "clock_style";
     private static final String PREF_BATT_BAR = "battery_bar_list";
     private static final String PREF_BATT_BAR_STYLE = "battery_bar_style";
@@ -76,6 +77,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private ColorPickerPreference mBatteryBarColor;
     private CheckBoxPreference mStatusBarAutoHide; 
     private CheckBoxPreference mFullScreenStatusBar;
+    ListPreference mFullScreenStatusBarTimeout; 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -186,6 +188,11 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mFullScreenStatusBar.setChecked(Settings.System.getBoolean(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.FULLSCREEN_STATUSBAR, true)); 
 
+        mFullScreenStatusBarTimeout = (ListPreference) findPreference(FREF_FULLSCREEN_STATUSBAR_TIMEOUT);
+        mFullScreenStatusBarTimeout.setOnPreferenceChangeListener(this);
+        mFullScreenStatusBarTimeout.setValue(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.FULLSCREEN_STATUSBAR_TIMEOUT, 10000) + ""); 
+
 	mCircleColorReset = (Preference) findPreference(PREF_CIRCLE_COLOR_RESET);
         if (Settings.System.getInt(getActivity().getContentResolver(),
                     Settings.System.STATUS_BAR_CIRCLE_BATTERY_RESET, 0) == 1) {
@@ -293,6 +300,11 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
                     Settings.System.STATUS_BAR_CIRCLE_BATTERY_RESET, 1);
             circleColorReset();
             return true;
+        } else if (preference == mFullScreenStatusBarTimeout) {
+            int val = Integer.parseInt((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.FULLSCREEN_STATUSBAR_TIMEOUT, val);
+            return true; 
         }
         return false;
     }
