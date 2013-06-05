@@ -1096,6 +1096,9 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="low_battery_warning_policy_sound">Sound only</string>
     <string name="low_battery_warning_policy_disabled">Disabled</string> 
 
+    <!-- Notification Behavior Preferences -->
+    <string name="notification_behaviour_title">Notification behavior</string> 
+
     <!-- finnqBuilds ADDITIONS START -->
 
     <!-- Settings Group: NavigationBar -->
