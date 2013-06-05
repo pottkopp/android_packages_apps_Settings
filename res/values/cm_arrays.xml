@@ -782,6 +782,19 @@
     </string-array>
     <!-- Interface : App sidebar **END** -->
 
+    <!-- NFC settings. -->
+    <string-array name="nfc_polling_mode_entries">
+       <item>@string/nfc_polling_mode_screen_off</item>
+       <item>@string/nfc_polling_mode_screen_locked</item>
+       <item>@string/nfc_polling_mode_screen_unlocked</item>
+    </string-array>
+
+    <string-array name="nfc_polling_mode_values">
+       <item>1</item>
+       <item>2</item>
+       <item>3</item>
+    </string-array> 
+
     <!-- finnqBuilds EDITS START -->
 
     <string-array name="battery_bar_entries">
