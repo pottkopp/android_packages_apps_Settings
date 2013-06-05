@@ -2,7 +2,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:codefirex="http://schemas.android.com/apk/res/com.android.settings.cyanogenmod"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/pref_interface_app_sidebar_title" >
 
     <SwitchPreference
