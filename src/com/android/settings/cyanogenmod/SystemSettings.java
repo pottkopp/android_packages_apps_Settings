@@ -16,6 +16,7 @@
 
 package com.android.settings.cyanogenmod;
 
+import android.app.INotificationManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
@@ -60,6 +61,9 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
     private static final String KEY_EXPANDED_DESKTOP_NO_NAVBAR = "expanded_desktop_no_navbar";
     private static final String KEY_FULLSCREEN_KEYBOARD = "fullscreen_keyboard";
     private static final String KEY_LOW_BATTERY_WARNING_POLICY = "pref_low_battery_warning_policy";
+    private static final String KEY_HALO_STATE = "halo_state";
+    private static final String KEY_HALO_HIDE = "halo_hide";
+    private static final String KEY_HALO_REVERSED = "halo_reversed"; 
 
     private PreferenceScreen mNotificationPulse;
     private PreferenceScreen mBatteryPulse;
@@ -68,9 +72,14 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
     private CheckBoxPreference mExpandedDesktopNoNavbarPref;
     private CheckBoxPreference mFullscreenKeyboard;
     private ListPreference mLowBatteryWarning;
+    private ListPreference mHaloState;
+    private CheckBoxPreference mHaloHide;
+    private CheckBoxPreference mHaloReversed; 
 
     private ListPreference mNavigationBarHeight;
     private boolean mIsPrimary;
+
+    private INotificationManager mNotificationManager; 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,6 +87,9 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
 
         addPreferencesFromResource(R.xml.system_settings);
         PreferenceScreen prefScreen = getPreferenceScreen();
+
+        mNotificationManager = INotificationManager.Stub.asInterface(
+                ServiceManager.getService(Context.NOTIFICATION_SERVICE));
 
         //NavigationBarHeight - TODO make it depending on the user
         mNavigationBarHeight = (ListPreference) findPreference(KEY_NAVIGATION_BAR_HEIGHT);
@@ -199,7 +211,28 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
         mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntry());
         mLowBatteryWarning.setOnPreferenceChangeListener(this); 
 
+        mHaloState = (ListPreference) findPreference(KEY_HALO_STATE);
+        mHaloState.setValue(String.valueOf((isHaloPolicyBlack() ? "1" : "0")));
+        mHaloState.setOnPreferenceChangeListener(this);
+
+        mHaloHide = (CheckBoxPreference) findPreference(KEY_HALO_HIDE);
+        mHaloHide.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.HALO_HIDE, 0) == 1);
+
+        mHaloReversed = (CheckBoxPreference) findPreference(KEY_HALO_REVERSED);
+        mHaloReversed.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.HALO_REVERSED, 1) == 1); 
+
     }
+
+    private boolean isHaloPolicyBlack() {
+        try {
+            return mNotificationManager.isHaloPolicyBlack();
+        } catch (android.os.RemoteException ex) {
+                // System dead
+        }
+        return true;
+    } 
 
     @Override
     public void onResume() {
@@ -243,8 +276,16 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
         } else if (preference == mFullscreenKeyboard) {
             boolean value = (Boolean) objValue;
             Settings.System.putBoolean(getActivity().getApplicationContext().getContentResolver(),
-                        Settings.System.FULLSCREEN_KEYBOARD, value);
+                    Settings.System.FULLSCREEN_KEYBOARD, value);
             return true;
+        } else if (preference == mHaloState) {
+            boolean state = Integer.valueOf((String) objValue) == 1;
+            try {
+                mNotificationManager.setHaloPolicyBlack(state);
+            } catch (android.os.RemoteException ex) {
+                // System dead
+            }          
+            return true; 
         } else if (preference == mLowBatteryWarning) {
             int lowBatteryWarning = Integer.valueOf((String) objValue);
             int index = mLowBatteryWarning.findIndexOfValue((String) objValue);
@@ -257,6 +298,20 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
 
         return false;
     }
+
+     @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if  (preference == mHaloHide) {  
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.HALO_HIDE, mHaloHide.isChecked()
+                    ? 1 : 0);  
+        } else if (preference == mHaloReversed) {  
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.HALO_REVERSED, mHaloReversed.isChecked()
+                    ? 1 : 0);  
+        }
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
+    } 
 
     private void updateLightPulseDescription() {
         if (Settings.System.getInt(getActivity().getContentResolver(),
