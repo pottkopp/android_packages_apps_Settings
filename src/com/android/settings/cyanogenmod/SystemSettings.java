@@ -16,6 +16,7 @@
 
 package com.android.settings.cyanogenmod;
 
+import android.app.ActivityManager; 
 import android.app.INotificationManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -66,6 +67,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
     private static final String KEY_HALO_STATE = "halo_state";
     private static final String KEY_HALO_HIDE = "halo_hide";
     private static final String KEY_HALO_REVERSED = "halo_reversed"; 
+    private static final String KEY_HALO_PAUSE = "halo_pause";
     private static final String KEY_WE_WANT_POPUPS = "show_popup";
     private static final String KEY_MMS_BREATH = "mms_breath";
     private static final String KEY_MISSED_CALL_BREATH = "missed_call_breath";
@@ -82,6 +84,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
     private ListPreference mHaloState;
     private CheckBoxPreference mHaloHide;
     private CheckBoxPreference mHaloReversed; 
+    private CheckBoxPreference mHaloPause;
     private CheckBoxPreference mWeWantPopups;
     private CheckBoxPreference mMMSBreath;
     private CheckBoxPreference mMissedCallBreath;
@@ -230,6 +233,11 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
         mHaloReversed.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.HALO_REVERSED, 1) == 1); 
 
+        int isLowRAM = (ActivityManager.isLargeRAM()) ? 0 : 1;
+        mHaloPause = (CheckBoxPreference) findPreference(KEY_HALO_PAUSE);
+        mHaloPause.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.HALO_PAUSE, isLowRAM) == 1); 
+
         int showPopups = Settings.System.getInt(getContentResolver(), Settings.System.WE_WANT_POPUPS, 1);
 
         mWeWantPopups = (CheckBoxPreference) findPreference(KEY_WE_WANT_POPUPS);
@@ -361,6 +369,11 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.HALO_REVERSED, mHaloReversed.isChecked()
                     ? 1 : 0);  
+
+        } else if (preference == mHaloPause) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.HALO_PAUSE, mHaloPause.isChecked()
+                    ? 1 : 0); 
 
         } else if (preference == mScreenOnNotificationLed) {
             Settings.System.putInt(getActivity().getContentResolver(),
