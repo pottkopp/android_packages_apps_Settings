@@ -29,6 +29,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.ContentObserver;
@@ -68,6 +69,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_HOME_WAKE = "pref_home_wake";
     private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
     private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
+    private static final String PREF_NOTIFICATION_SHOW_WIFI_SSID = "notification_show_wifi_ssid";
+    private static final String PREF_NOTIFICATION_OPTIONS = "options";
+
     private static final String KEY_DUAL_PANEL = "force_dualpanel";
     private static final String KEY_WAKEUP_WHEN_PLUGGED_UNPLUGGED = "wakeup_when_plugged_unplugged"; 
     private static final String KEY_SCREEN_OFF_ANIMATION = "screen_off_animation";
@@ -85,6 +89,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mHomeWake;
     private CheckBoxPreference mVolumeWake;
     private Preference mCustomLabel;
+    CheckBoxPreference mShowWifiName;
     private CheckBoxPreference mDualPanel;
     private CheckBoxPreference mWakeUpWhenPluggedOrUnplugged; 
     private PreferenceScreen mDisplayRotationPreference;
@@ -192,6 +197,13 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
         updateCustomLabelTextSummary();
+
+        mShowWifiName = (CheckBoxPreference) findPreference(PREF_NOTIFICATION_SHOW_WIFI_SSID);
+        mShowWifiName.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.NOTIFICATION_SHOW_WIFI_SSID, 0) == 1);
+
+        PackageManager pm = getPackageManager();
+        boolean isMobileData = pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY);
 
         // Remove the wake-up category if neither of the two items above are enabled
         if (removeWakeupCategory) {
@@ -501,8 +513,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             });
 
             alert.show();
+        } else if (preference == mShowWifiName) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.NOTIFICATION_SHOW_WIFI_SSID,
+                    mShowWifiName.isChecked() ? 1 : 0);
+            return true; 
         }
-
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
