@@ -65,6 +65,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_WIFI_DISPLAY = "wifi_display";
     private static final String KEY_DISPLAY_ROTATION = "display_rotation";
     private static final String KEY_WAKEUP_CATEGORY = "category_wakeup_options";
+    private static final String KEY_HOME_WAKE = "pref_home_wake";
     private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
     private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
     private static final String KEY_DUAL_PANEL = "force_dualpanel";
@@ -81,6 +82,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private DisplayManager mDisplayManager;
 
+    private CheckBoxPreference mHomeWake;
     private CheckBoxPreference mVolumeWake;
     private Preference mCustomLabel;
     private CheckBoxPreference mDualPanel;
@@ -154,15 +156,31 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mWifiDisplayPreference = null;
         }
 
+        // Start the wake-up category handling
+        boolean removeWakeupCategory = true;
+
+        // Home button wake
+        mHomeWake = (CheckBoxPreference) findPreference(KEY_HOME_WAKE);
+        if (mHomeWake != null) {
+            if (!getResources().getBoolean(R.bool.config_show_homeWake)) {
+                getPreferenceScreen().removePreference(mHomeWake);
+            } else {
+                mHomeWake.setChecked(Settings.System.getInt(resolver,
+                        Settings.System.HOME_WAKE_SCREEN, 1) == 1);
+                removeWakeupCategory = false;
+            }
+        }
+
+        // Volume rocker wake
         mVolumeWake = (CheckBoxPreference) findPreference(KEY_VOLUME_WAKE);
         if (mVolumeWake != null) {
             if (!getResources().getBoolean(R.bool.config_show_volumeRockerWake)
                     || !Utils.hasVolumeRocker(getActivity())) {
                 getPreferenceScreen().removePreference(mVolumeWake);
-                getPreferenceScreen().removePreference((PreferenceCategory) findPreference(KEY_WAKEUP_CATEGORY));
             } else {
                 mVolumeWake.setChecked(Settings.System.getInt(resolver,
                         Settings.System.VOLUME_WAKE_SCREEN, 0) == 1);
+                removeWakeupCategory = false;
             }
         }
         mDualPanel = (CheckBoxPreference) findPreference(KEY_DUAL_PANEL);
@@ -175,6 +193,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
         updateCustomLabelTextSummary();
 
+        // Remove the wake-up category if neither of the two items above are enabled
+        if (removeWakeupCategory) {
+            getPreferenceScreen().removePreference(
+                    (PreferenceCategory) findPreference(KEY_WAKEUP_CATEGORY));
+        }
+
         mScreenOffAnimation = (CheckBoxPreference) findPreference(KEY_SCREEN_OFF_ANIMATION);
         if(getResources().getBoolean(com.android.internal.R.bool.config_screenOffAnimation)) {
             mScreenOffAnimation.setChecked(Settings.System.getInt(resolver,
@@ -182,7 +206,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         } else {
             getPreferenceScreen().removePreference(mScreenOffAnimation);
         }
-
     }
 
     private void updateDisplayRotationPreferenceDescription() {
@@ -424,7 +447,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mVolumeWake) {
+        if (preference == mHomeWake) {
+            Settings.System.putInt(getContentResolver(), Settings.System.HOME_WAKE_SCREEN,
+                    mHomeWake.isChecked() ? 1 : 0);
+            return true;
+        } else if (preference == mVolumeWake) {
             Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_WAKE_SCREEN,
                     mVolumeWake.isChecked() ? 1 : 0);
             return true;
