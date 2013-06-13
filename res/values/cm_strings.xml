@@ -1046,9 +1046,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="fullscreen_statusbar_timeout_title">Fullscreen Statusbar Timeout</string>
     <string name="fullscreen_statusbar_timeout_summary">Timeout for Fullscreen Statusbar</string> 
 
-    <!-- Permissions Management -->
-    <string name="permissions_settings_title">Permissions</string> 
-
     <!-- App Sidebar -->
     <string name="pref_interface_app_sidebar_title">Appbar</string>
     <string name="pref_interface_app_sidebar_summary">Customize your app sidebar</string>
