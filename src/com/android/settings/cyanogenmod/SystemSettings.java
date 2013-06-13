@@ -64,6 +64,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
     private static final String KEY_HALO_STATE = "halo_state";
     private static final String KEY_HALO_HIDE = "halo_hide";
     private static final String KEY_HALO_REVERSED = "halo_reversed"; 
+    private static final String KEY_WE_WANT_POPUPS = "show_popup";
 
     private PreferenceScreen mNotificationPulse;
     private PreferenceScreen mBatteryPulse;
@@ -75,6 +76,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
     private ListPreference mHaloState;
     private CheckBoxPreference mHaloHide;
     private CheckBoxPreference mHaloReversed; 
+    private CheckBoxPreference mWeWantPopups;
 
     private ListPreference mNavigationBarHeight;
     private boolean mIsPrimary;
@@ -223,6 +225,12 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
         mHaloReversed.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.HALO_REVERSED, 1) == 1); 
 
+        int showPopups = Settings.System.getInt(getContentResolver(), Settings.System.WE_WANT_POPUPS, 1);
+
+        mWeWantPopups = (CheckBoxPreference) findPreference(KEY_WE_WANT_POPUPS);
+        mWeWantPopups.setOnPreferenceChangeListener(this);
+        mWeWantPopups.setChecked(showPopups > 0);
+
     }
 
     private boolean isHaloPolicyBlack() {
@@ -294,7 +302,12 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
                     lowBatteryWarning);
             mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntries()[index]);
             return true;
-        } 
+        } else if (preference == mWeWantPopups) {
+            boolean checked = (Boolean) objValue;
+                        Settings.System.putBoolean(getActivity().getContentResolver(),
+                                Settings.System.WE_WANT_POPUPS, checked);
+            return true;
+        }
 
         return false;
     }

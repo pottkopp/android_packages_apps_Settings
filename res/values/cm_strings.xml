@@ -1117,6 +1117,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="halo_state_black">Black list</string>
     <string name="halo_state_white">White list</string> 
 
+    <!-- We want popups -->
+    <string name="popups_title">Allow floating windows</string>
+    <string name="popups_summary">Controls whether you want floating windows from notification panel</string>
+
     <!-- finnqBuilds ADDITIONS START -->
 
     <!-- Settings Group: NavigationBar -->
