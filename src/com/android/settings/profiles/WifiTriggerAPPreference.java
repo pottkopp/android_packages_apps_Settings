@@ -37,11 +37,11 @@ public class WifiTriggerAPPreference extends Preference {
         setTitle(mSsid);
     }
 
-    public void setTriggerType(int trigger){
+    public void setTriggerType(int trigger) {
         mTriggerType = trigger;
     }
 
-    public int getTriggerType(){
+    public int getTriggerType() {
         return mTriggerType;
     }
 
@@ -54,15 +54,16 @@ public class WifiTriggerAPPreference extends Preference {
         return mConfig;
     }
 
-    public String getSSID(){
+    public String getSSID() {
         return mSsid;
     }
 
     public static String removeDoubleQuotes(String string) {
-        int length = string.length();
-        if ((length > 1) && (string.charAt(0) == '"')
-                && (string.charAt(length - 1) == '"')) {
-            return string.substring(1, length - 1);
+        final int length = string.length();
+        if (length >= 2) {
+            if (string.startsWith("\"") && string.endsWith("\"")) {
+                return string.substring(1, length - 1);
+            }
         }
         return string;
     }

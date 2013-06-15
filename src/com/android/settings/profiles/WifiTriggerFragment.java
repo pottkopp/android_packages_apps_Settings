@@ -40,13 +40,9 @@ import com.android.settings.SettingsPreferenceFragment;
  * Settings Preference to configure triggers to switch profiles base on Wi-Fi events
  */
 public class WifiTriggerFragment extends SettingsPreferenceFragment {
-
     private Profile mProfile;
-
     private WifiTriggerAPPreference mSelectedAccessPoint;
-
     private ProfileManager mProfileManager;
-
     private WifiManager mWifiManager;
 
     private static final int WIFI_TRIGGER = 1;
@@ -70,28 +66,33 @@ public class WifiTriggerFragment extends SettingsPreferenceFragment {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         if (args != null) {
-            mProfile = args.getParcelable("Profile");
+            mProfile = args.getParcelable("profile");
         }
     }
 
     private void loadWifiConfiguration() {
-        getPreferenceScreen().removeAll();
         final List<WifiConfiguration> configs = mWifiManager.getConfiguredNetworks();
-        Resources res = getResources();
-        List<WifiTriggerAPPreference> aps = new ArrayList<WifiTriggerAPPreference>();
+        final Resources res = getResources();
+        final List<WifiTriggerAPPreference> aps = new ArrayList<WifiTriggerAPPreference>();
+
+        getPreferenceScreen().removeAll();
+
         if (configs != null) {
             for (WifiConfiguration config : configs) {
                 WifiTriggerAPPreference accessPoint = new WifiTriggerAPPreference(getActivity(), config);
                 int state = mProfile.getWifiTrigger(accessPoint.getSSID());
                 String summary = res.getStringArray(R.array.profile_trigger_wifi_options)[state];
+
                 accessPoint.setSummary(summary);
                 accessPoint.setTriggerType(state);
                 aps.add(accessPoint);
             }
         }
+
         Collections.sort(aps, new Comparator<WifiTriggerAPPreference>() {
-            public int compare(WifiTriggerAPPreference o1, WifiTriggerAPPreference o2){
-                if (o1.getTriggerType() == o2.getTriggerType()){
+            @Override
+            public int compare(WifiTriggerAPPreference o1, WifiTriggerAPPreference o2) {
+                if (o1.getTriggerType() == o2.getTriggerType()) {
                     return o1.getSSID().compareTo(o2.getSSID());
                 }
                 return o1.getTriggerType() < o2.getTriggerType() ? -1 : 1;
@@ -100,7 +101,6 @@ public class WifiTriggerFragment extends SettingsPreferenceFragment {
         for (WifiTriggerAPPreference ap: aps) {
             getPreferenceScreen().addPreference(ap);
         }
-
     }
 
     @Override
@@ -117,20 +117,22 @@ public class WifiTriggerFragment extends SettingsPreferenceFragment {
     public Dialog onCreateDialog(int dialogId) {
         switch (dialogId) {
             case WIFI_TRIGGER:
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle(R.string.profile_trigger_configure);
                 final String ssid = mSelectedAccessPoint.getSSID();
                 int currentTriggerType = mProfile.getWifiTrigger(ssid);
-                builder.setSingleChoiceItems(R.array.profile_trigger_wifi_options, currentTriggerType, new DialogInterface.OnClickListener() {
 
-                    public void onClick(DialogInterface dialog, int which) {
-                        mProfile.setWifiTrigger(ssid, which);
-                        mProfileManager.updateProfile(mProfile);
-                        loadWifiConfiguration();
-                        dialog.dismiss();
-                    }
-                });
-                return builder.create();
+                return new AlertDialog.Builder(getActivity())
+                        .setTitle(R.string.profile_trigger_configure)
+                        .setSingleChoiceItems(R.array.profile_trigger_wifi_options, currentTriggerType,
+                                new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mProfile.setWifiTrigger(ssid, which);
+                                mProfileManager.updateProfile(mProfile);
+                                loadWifiConfiguration();
+                                dialog.dismiss();
+                            }
+                        })
+                        .create();
         }
         return super.onCreateDialog(dialogId);
     }

@@ -138,7 +138,7 @@ public class ProfileConfig extends SettingsPreferenceFragment
                     MenuItem.SHOW_AS_ACTION_WITH_TEXT);
         }
         MenuItem wifi = menu.add(0, MENU_WIFI, 0, R.string.profile_trigger_wifi)
-                .setIcon(R.drawable.ic_settings_wireless);
+                .setIcon(R.drawable.ic_location);
         wifi.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
         MenuItem delete = menu.add(0, MENU_DELETE, 1, R.string.profile_menu_delete)
@@ -189,13 +189,13 @@ public class ProfileConfig extends SettingsPreferenceFragment
     }
 
     private void startWifiTrigger() {
-        PreferenceActivity pa = (PreferenceActivity) getActivity();
-        Bundle args = new Bundle();
-        args.putParcelable("Profile", mProfile);
-        Resources res = getResources();
-        String message = res.getString(R.string.profile_trigger_title_wifi, mProfile.getName());
-        pa.startPreferencePanel(WifiTriggerFragment.class.getName(), args,
-                0, message, null, 0);
+        final PreferenceActivity pa = (PreferenceActivity) getActivity();
+        final String title = getResources().getString(R.string.profile_trigger_title_wifi,
+                mProfile.getName());
+        final Bundle args = new Bundle();
+        args.putParcelable("profile", mProfile);
+
+        pa.startPreferencePanel(WifiTriggerFragment.class.getName(), args, 0, title, null, 0);
     }
 
     private void fillList() {
