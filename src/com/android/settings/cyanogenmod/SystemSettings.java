@@ -236,13 +236,17 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
         mWeWantPopups.setOnPreferenceChangeListener(this);
         mWeWantPopups.setChecked(showPopups > 0);
 
+        int statusMMSBreath = Settings.System.getInt(getContentResolver(), Settings.System.MMS_BREATH, 1);
+
         mMMSBreath = (CheckBoxPreference) findPreference(KEY_MMS_BREATH);
-        mMMSBreath.setChecked(Settings.System.getInt(resolver,
-                Settings.System.MMS_BREATH, 0) == 1);
+        mMMSBreath.setOnPreferenceChangeListener(this);
+        mMMSBreath.setChecked(statusMMSBreath > 0);
+
+        int statusMissedCallBreath = Settings.System.getInt(getContentResolver(), Settings.System.MISSED_CALL_BREATH, 1);
 
         mMissedCallBreath = (CheckBoxPreference) findPreference(KEY_MISSED_CALL_BREATH);
-        mMissedCallBreath.setChecked(Settings.System.getInt(resolver,
-                Settings.System.MISSED_CALL_BREATH, 0) == 1);
+        mMissedCallBreath.setOnPreferenceChangeListener(this);
+        mMissedCallBreath.setChecked(statusMissedCallBreath > 0);
 
     }
 
@@ -316,12 +320,14 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
             mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntries()[index]);
             return true;
         } else if (preference == mMMSBreath) {
-            Settings.System.putInt(mContext.getContentResolver(), Settings.System.MMS_BREATH, 
-                    mMMSBreath.isChecked() ? 1 : 0);
+            boolean value = (Boolean) objValue;
+            Settings.System.putBoolean(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.MMS_BREATH, value);
             return true;
         } else if (preference == mMissedCallBreath) {
-            Settings.System.putInt(mContext.getContentResolver(), Settings.System.MISSED_CALL_BREATH, 
-                    mMissedCallBreath.isChecked() ? 1 : 0);
+            boolean value = (Boolean) objValue;
+            Settings.System.putBoolean(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.MISSED_CALL_BREATH, value);
             return true;
         } else if (preference == mWeWantPopups) {
             boolean checked = (Boolean) objValue;
