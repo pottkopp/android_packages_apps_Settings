@@ -68,6 +68,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
     private static final String KEY_WE_WANT_POPUPS = "show_popup";
     private static final String KEY_MMS_BREATH = "mms_breath";
     private static final String KEY_MISSED_CALL_BREATH = "missed_call_breath";
+    private static final String KEY_SCREEN_ON_NOTIFICATION_LED = "screen_on_notification_led";
 
     private PreferenceScreen mNotificationPulse;
     private PreferenceScreen mBatteryPulse;
@@ -83,7 +84,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
     private CheckBoxPreference mWeWantPopups;
     private CheckBoxPreference mMMSBreath;
     private CheckBoxPreference mMissedCallBreath;
-
+    private CheckBoxPreference mScreenOnNotificationLed;
 
     private ListPreference mNavigationBarHeight;
     private boolean mIsPrimary;
@@ -254,6 +255,13 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
         mMissedCallBreath.setOnPreferenceChangeListener(this);
         mMissedCallBreath.setChecked(statusMissedCallBreath > 0);
 
+        int statusScreenOnNotificationLed = Settings.System.getInt(getContentResolver(),
+                Settings.System.SCREEN_ON_NOTIFICATION_LED, 1);
+
+        mScreenOnNotificationLed = (CheckBoxPreference) findPreference(KEY_SCREEN_ON_NOTIFICATION_LED);
+        mScreenOnNotificationLed.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.SCREEN_ON_NOTIFICATION_LED, 0) == 1);
+
     }
 
     private boolean isHaloPolicyBlack() {
@@ -360,6 +368,12 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.HALO_REVERSED, mHaloReversed.isChecked()
                     ? 1 : 0);  
+
+        } else if (preference == mScreenOnNotificationLed) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.SCREEN_ON_NOTIFICATION_LED,
+                    mScreenOnNotificationLed.isChecked() ? 1 : 0);
+
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     } 
