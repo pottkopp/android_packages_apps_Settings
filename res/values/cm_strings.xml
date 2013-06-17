@@ -678,6 +678,9 @@
     <string name="expanded_desktop_status_bar">Status bar visible</string>
     <string name="expanded_desktop_no_status_bar">Status bar hidden</string>
     <string name="power_menu_profiles_title">Profile switcher</string>
+    <string name="power_menu_profiles_disabled">Disabled</string>
+    <string name="power_menu_profiles_lock">Disabled on lockscreen</string>
+    <string name="power_menu_profiles_all">Always show</string> 
     <string name="power_menu_airplane_title">Airplane mode</string>
     <string name="power_menu_user_title">User switcher</string>
     <string name="power_menu_sound_title">Sound panel</string>
