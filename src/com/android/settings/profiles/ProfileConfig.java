@@ -65,7 +65,7 @@ public class ProfileConfig extends SettingsPreferenceFragment
 
     private static final int MENU_DELETE = Menu.FIRST + 1;
 
-    private static final int MENU_WIFI = Menu.FIRST + 2;
+    private static final int MENU_TRIGGERS = Menu.FIRST + 2;
 
     private Profile mProfile;
 
@@ -137,7 +137,7 @@ public class ProfileConfig extends SettingsPreferenceFragment
             nfc.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
                     MenuItem.SHOW_AS_ACTION_WITH_TEXT);
         }
-        MenuItem triggers = menu.add(0, MENU_WIFI, 0, R.string.profile_triggers)
+        MenuItem triggers = menu.add(0, MENU_TRIGGERS, 0, R.string.profile_triggers)
                 .setIcon(R.drawable.ic_location);
         triggers.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
@@ -156,7 +156,7 @@ public class ProfileConfig extends SettingsPreferenceFragment
             case MENU_NFC_WRITE:
                 startNFCProfileWriter();
                 return true;
-            case MENU_WIFI:
+            case MENU_TRIGGERS:
                 startTriggerFragment();
                 return true;
             default:
@@ -190,12 +190,10 @@ public class ProfileConfig extends SettingsPreferenceFragment
 
     private void startTriggerFragment() {
         final PreferenceActivity pa = (PreferenceActivity) getActivity();
-        final String title = getResources().getString(R.string.profile_trigger_title,
-                mProfile.getName());
         final Bundle args = new Bundle();
         args.putParcelable("profile", mProfile);
 
-        pa.startPreferencePanel(TriggersFragment.class.getName(), args, 0, title, null, 0);
+        pa.startPreferencePanel(TriggersFragment.class.getName(), args, 0, "", null, 0);
     }
 
     private void fillList() {

@@ -21,19 +21,25 @@ import android.content.Context;
 
 public class BluetoothTriggerPreference extends AbstractTriggerPreference {
 
-    private BluetoothDevice mDevice;
+    private String mAddress;
 
     BluetoothTriggerPreference(Context context, BluetoothDevice device) {
         super(context);
-        mDevice = device;
-        if (mDevice.getAlias() != null) {
-            setTitle(mDevice.getAlias());
+        mAddress = device.getAddress();
+        if (device.getAlias() != null) {
+            setTitle(device.getAlias());
         } else {
-            setTitle(mDevice.getName());
+            setTitle(device.getName());
         }
     }
 
+    BluetoothTriggerPreference(Context context, String name, String address) {
+        super(context);
+        mAddress = address;
+        setTitle(name);
+    }
+
     public String getAddress() {
-        return mDevice.getAddress();
+        return mAddress;
     }
 }

@@ -30,13 +30,15 @@ public class WifiTriggerAPPreference extends AbstractTriggerPreference {
         setTitle(mSSID);
     }
 
+    WifiTriggerAPPreference(Context context, String ssid) {
+        super(context);
+        mSSID = ssid;
+        setTitle(mSSID);
+    }
+
      private void loadConfig(WifiConfiguration config) {
         mSSID = (config.SSID == null ? "" : removeDoubleQuotes(config.SSID));
         mConfig = config;
-    }
-
-    public WifiConfiguration getConfig() {
-        return mConfig;
     }
 
     public String getSSID() {
