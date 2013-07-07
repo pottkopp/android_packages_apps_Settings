@@ -1199,6 +1199,9 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <!-- finnqBuilds ADDITIONS START -->
 
+    <string name="arrow_right">→</string>
+    <string name="arrow_down">↓</string>
+
     <!-- Settings Group: NavigationBar -->
     <string name="navigation_bar_category">NavigationBar</string>
 
