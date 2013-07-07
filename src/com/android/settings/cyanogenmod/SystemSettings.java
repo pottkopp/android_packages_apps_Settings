@@ -38,7 +38,6 @@ import android.view.IWindowManager;
 import android.view.WindowManagerGlobal;
 
 import com.android.settings.R;
-import com.android.settings.util.Helpers;
 import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.regex.Matcher;
@@ -253,8 +252,8 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
         mHaloPause.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.HALO_PAUSE, isLowRAM) == 1); 
 
-        mHaloColors = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_COLORS);
-        mHaloColors.setChecked(Settings.System.getInt(mContext.getContentResolver(),
+        mHaloColors = (CheckBoxPreference) findPreference(KEY_HALO_COLORS);
+        mHaloColors.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.HALO_COLORS, 0) == 1);
 
         mHaloEffectColor = (ColorPickerPreference) findPreference(KEY_HALO_EFFECT_COLOR);
@@ -395,7 +394,6 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
             int intHex = ColorPickerPreference.convertToColorInt(hex);
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.HALO_EFFECT_COLOR, intHex);
-            Helpers.restartSystemUI();
             return true;
         } else if (preference == mHaloBubbleColor) {
             String hex = ColorPickerPreference.convertToARGB(
@@ -440,10 +438,9 @@ public class SystemSettings extends SettingsPreferenceFragment implements Prefer
                     ? 1 : 0); 
 
         } else if (preference == mHaloColors) {
-            Settings.System.putInt(mContext.getContentResolver(),
+            Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.HALO_COLORS, mHaloColors.isChecked()
                     ? 1 : 0);
-            Helpers.restartSystemUI(); 
 
         } else if (preference == mScreenOnNotificationLed) {
             Settings.System.putInt(getActivity().getContentResolver(),
