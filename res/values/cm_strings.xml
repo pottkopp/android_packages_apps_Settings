@@ -1155,7 +1155,11 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="privacy_guard_help_text">In this screen you can choose for which apps Privacy Guard should be active by simply tapping on them. Selected apps will not be able to access your personal data, such as contacts, messages or call logs. Long pressing on an entry opens the app details screen for that app.\n\nBy default system apps are not shown. If you want to show them or filter apps to show only the ones requesting access to personal data by their permissions, select the respective options in the menu.</string>
     <string name="privacy_guard_manager_show_system_apps">Show system apps</string>
     <string name="privacy_guard_manager_filter_permissions">Permission filter</string>
+
     <!-- HALO -->
+    <string name="pref_halo_title">HALO</string>
+    <string name="pref_halo_summary">Settings for HALO</string>
+
     <string name="halo_enabled_title">Enable HALO</string>
     <string name="halo_enabled_summary">Completely enable or disable HALO</string>
     <string name="halo_hide_title">Hide HALO after activity</string>
@@ -1210,9 +1214,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <!-- Settings Group: LEDs -->
     <string name="led_settings_title">Notification LED</string> 
-
-    <!-- Settings Group: Halo -->
-    <string name="halo_category">HALO</string>
 
     <!-- Settings Group: Tweaks -->
     <string name="tweaks_category">Tweaks</string>
