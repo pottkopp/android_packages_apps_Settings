@@ -1246,6 +1246,9 @@ your apps faster.</string>
     <!-- Settings Group: Tweaks -->
     <string name="tweaks_category">Tweaks</string>
 
+    <!-- Settings Group: Advanced -->
+    <string name="advanced_category_title">Advanced Features</string>
+
     <!-- Statusbar | Battery -->
     <string name="battery_icon">Battery icon style</string>
     <string name="battery_not_title">Battery icon in notifications</string>
