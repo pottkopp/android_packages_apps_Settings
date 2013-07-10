@@ -83,7 +83,7 @@ public class PowerMenu extends SettingsPreferenceFragment implements
         mProfilesPref.setSummary(mProfilesPref.getEntries()[mProfileShow]);
 
         // Only enable if System Profiles are also enabled
-        boolean enabled = Settings.System.getInt(getContentResolver(),
+        enabled = Settings.System.getInt(getContentResolver(),
                 Settings.System.SYSTEM_PROFILES_ENABLED, 1) == 1;
         mProfilesPref.setEnabled(enabled);
 
