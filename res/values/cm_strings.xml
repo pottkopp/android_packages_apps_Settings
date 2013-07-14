@@ -1216,6 +1216,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="lockscreen_widgets_all_title">Enable all widgets</string>
     <string name="lockscreen_widgets_all_summary">Ability to add widgets on lockscreen</string>
 
+    <!-- Network speed -->
+    <string name="show_network_speed">Network speed indicator</string>
+    <string name="show_network_speed_summary">Show network speed in statsbar</string> 
+
     <!-- Ram bar strings -->
     <string name="ram_bar_title">Recents RAM bar</string>
     <string name="ram_bar_summary">Shows a RAM usage bar in recent apps view</string>
