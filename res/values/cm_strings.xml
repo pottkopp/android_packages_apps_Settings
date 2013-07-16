@@ -1218,7 +1218,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <!-- Network speed -->
     <string name="show_network_speed">Network speed indicator</string>
-    <string name="show_network_speed_summary">Show network speed in statsbar</string> 
+    <string name="show_network_speed_summary">Show network speed in statusbar</string> 
 
     <!-- Ram bar strings -->
     <string name="ram_bar_title">Recents RAM bar</string>
