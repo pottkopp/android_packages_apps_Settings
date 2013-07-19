@@ -130,7 +130,7 @@ public class HaloSettings extends SettingsPreferenceFragment
         mWeWantPopups.setOnPreferenceChangeListener(this);
         mWeWantPopups.setChecked(showPopups > 0);
 
-        mHaloSize = (ListPreference) prefSet.findPreference(KEY_HALO_SIZE);
+        mHaloSize = (ListPreference) findPreference(KEY_HALO_SIZE);
         try {
             float haloSize = Settings.System.getFloat(getContentResolver(),
                     Settings.System.HALO_SIZE, 1.0f);
