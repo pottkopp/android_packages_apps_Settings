@@ -72,6 +72,14 @@
         <item>Brasilien</item>
     </string-array>
 
+    <!-- Notification behavior preferences -->
+    <string-array name="notifs_beh_entries">
+        <item>Normal</item>
+        <item>nie erweitern</item>
+        <item>immer erweitern</item>
+        <item>bisheriges Verhalten</item>
+    </string-array>
+
     <!-- **** finnqBuilds ADDITIONS START **** -->
 
     <string-array name="battery_bar_entries">

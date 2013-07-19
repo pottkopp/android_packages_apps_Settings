@@ -794,6 +794,102 @@ hilft, diese Anwendungen schneller zu öffnen.</string>
     <string name="ram_bar_color_disabled">Deaktiviert</string>
     <string name="ram_bar_button_reset">Farben zurück setzen</string> 
 
+    <!-- Auto-Hide Status Bar -->
+    <string name="auto_hide_statusbar">Statusleiste automatisch verstecken</string>
+    <string name="auto_hide_statusbar_summary">Statusleiste automatisch verstecken, wenn es keine Benachrichtigungen gibt.</string>
+
+    <!-- Fullscreen Keyboard -->
+    <string name="fullscreen_keyboard">Vollbildanzeige der Tastatur</string>
+    <string name="fullscreen_keyboard_summary">Erlaubt es, auch bei querliegendem Gerät alle Eingabefelder wie im Porträtmodus sehen zu können, statt nur dem aktuell gewählten.</string>
+
+    <!-- Fullscreen Status Bar -->
+    <string name="fullscreen_statusbar_title">Statusleiste bei Vollbildanzeige</string>
+    <string name="fullscreen_statusbar_summary">Ermöglicht das kurzzeitige Anzeigen der Statusleiste innerhalb von Vollbild-Apps durch Herunterwischen vom oberen Bildschirmrand.</string>
+    <string name="fullscreen_statusbar_timeout_title">Anzeigedauer der Statusleiste bei Vollbildanzeige</string>
+    <string name="fullscreen_statusbar_timeout_summary">Legt die Anzeigedauer der Statusleiste nach dem Heruntenwischen fest.</string>
+
+    <!-- App Sidebar -->
+    <string name="pref_interface_app_sidebar_title">Appbar</string>
+    <string name="pref_interface_app_sidebar_summary">Einrichten der App-Sidebar</string>
+    <string name="app_sidebar_enable_title">Appbar aktivieren</string>
+    <string name="app_sidebar_enable_summaryOn">Appbar ist aktiviert</string>
+    <string name="app_sidebar_enable_summaryOff">Appbar ist deaktiviert</string>
+    <string name="app_sidebar_setup_items_title">Einrichten der Inhalte der Appbar</string>
+    <string name="app_sidebar_setup_items_summary">Hinzufügen, Entfernen, und Anordnen von Appbar-Elementen</string>
+    <string name="app_sidebar_transparency_title">Tranparenz der Appbar</string>
+    <string name="app_sidebar_transparency_summary">Anpassen der Durchsichtigkeit der Appbar</string>
+    <string name="app_sidebar_position_title">Position der Appbar</string>
+    <string name="app_sidebar_position_summary">Position der Appbar an der linken oder rechten Seite des Bildschirms festlegen</string>
+    <string name="app_sidebar_position_left">Links</string>
+    <string name="app_sidebar_position_right">Rechts</string>
+    <string name="app_sidebar_hide_labels_title">Icon-Beschriftungen verstecken</string>
+    <string name="app_sidebar_hide_labels_summary">Verstecken der Icon-Beschriftungen innerhalb der Appbar</string>
+    <string name="tab_category">Sichtbares Tab</string>
+    <string name="use_tab_title">Tab anzeigen</string>
+    <string name="use_tab_summary">Anzeige eines Tabs auf der Seite, welches bei Berühren die \@appbar öffnet.</string>
+    <string name="tab_position_title">Anzeigeort des Tab</string>
+    <string name="tab_position_summary">Zeigt das Tab an der Seite des Bildschirms oben, mittig oder am unteren Ende an.</string>
+    <string name="tab_size_title">Tab Größe</string>
+    <string name="tab_size_summary">Einstellen der Größe des sichtbaren Tabs.</string>
+    <string name="trigger_category">Auslöser-Fläche</string>
+    <string name="trigger_width_title">Breite des Auslösers</string>
+    <string name="trigger_width_summary">Anpassen der Breite der Auslöserfläche</string>
+    <string name="trigger_top_title">Position des Auslösers</string>
+    <string name="trigger_top_summary">Anpassen der vertikalen Position der Auslöserfläche</string>
+    <string name="trigger_bottom_title">Höhe des Auslösers</string>
+    <string name="trigger_bottom_summary">Anpassen der Höhe der Auslöserfläche</string>
+
+    <string name="nfc_polling_mode_title">NFC Suchmodus</string>
+    <string name="nfc_polling_mode_screen_off">Bildschirm aus</string>
+    <string name="nfc_polling_mode_screen_locked">Bildschirm an, gesperrt</string>
+    <string name="nfc_polling_mode_screen_unlocked">Bildschirm an, entsperrt (Stadard)</string>
+
+    <!-- Display Screen-on and off Electron beam animations -->
+    <string name="screen_off_animation_title">Elektronenstrahl-Animation bei Ausschalten des Bildschirms</string>
+    <string name="screen_off_animation_summary">Zeigt einen weißen Balken wie mann man ihn vom Ausschalten von alten Röhren-Fernsehgeräten kennt.</string>
+
+    <string name="pref_low_battery_warning_policy_title">Warnung bei niedrigem Batteriestand</string>
+    <string name="pref_low_battery_warning_policy_dialog_title">Zeigt einen niedrigen Batteriestand an durch:</string>
+    <string name="low_battery_warning_policy_popup_sound">Popup-Dialog und Warnton (Standard)</string>
+    <string name="low_battery_warning_policy_notif_sound">Benachrichtigung und Warnton</string>
+    <string name="low_battery_warning_policy_popup">nur Popup-Dialog</string>
+    <string name="low_battery_warning_policy_notif">nur Benachrichtigung</string>
+    <string name="low_battery_warning_policy_sound">nur Warnton</string>
+    <string name="low_battery_warning_policy_disabled">keine Warnung</string>
+
+    <!-- Notification Behavior Preferences -->
+    <string name="notification_behaviour_title">Verhalten von Benachrichtigungen</string>
+
+    <!-- HALO -->
+    <string name="halo_enabled_title">HALO aktivieren</string>
+    <string name="halo_enabled_summary">HALO vollständig aktiveren bzw. deaktivieren</string>
+    <string name="halo_hide_title">HALO nach Aktivität verstecken</string>
+    <string name="halo_hide_summary">HALO wird sich für eingehende Tasks einmal bemerkbar machen und kurz darauf wieder verschwinden</string>
+    <string name="halo_reversed_title">Tauschen der HALO-Gesten</string>
+    <string name="halo_reversed_summary">Schaltet die Doppel-Tap-Wisch-Geste zwischen Positionierung und Aufgabemodus um</string>
+    <string name="halo_state_title">HALO Richtlinie</string>
+    <string name="halo_state_summary">Vorgehen nach Black-List bzw. White-List Verfahren?</string>
+    <string name="halo_state_black">Black-List</string>
+    <string name="halo_state_white">White-List</string>
+    <string name="halo_pause_title">HALO pausiert die aktive Applikation</string>
+    <string name="halo_pause_summary">Wenn mithilfe von HALO eine Applikation gestartet wird, wird das dann im Hintergrund befindliche Programm automatisch angehalten (standardmäßig aktiviert auf Geräten
+mit wenig Speicher)</string>
+
+    <!-- We want popups -->
+    <string name="popups_title">überlagenrnde Fenster ermöglichen</string>
+    <string name="popups_summary">Legt fest, ob App-Fenster die von HALO geöffnet werden die aktuelle App überlagern oder bildschirmfüllend dargestellt werden.</string>
+
+    <!-- Breathing Notifications -->
+    <string name="status_bar_breathing_notifs_title">Pulsierende Benachrichtigungen</string>
+    <string name="mms_breath">Pulsierende SMS</string>
+    <string name="mms_breath_summary">Blendet die Benachrichtung für SMS in der Statusleiste langsam ein und aus und erzeugt so einen Pulsschlageffekt</string>
+    <string name="missed_call_breath">Verpasste Anrufe pulsieren</string>
+    <string name="missed_call_breath_summary">Blendet die Benachrichtung für verpasste Anrufe in der Statusleiste langsam ein und aus und erzeugt so einen Pulsschlageffekt</string>
+
+    <!-- Screen-On Notification Light -->
+    <string name="screen_on_notification_led_title">LED Benachrichtigungs bei eingeschaltetem Bildschirm</string>
+    <string name="screen_on_notification_led_summary">Aktiviert die Benachrichtigungs-LED auch bei eingeschalteten Bildschirm.</string>
+
     <!-- CyanKang ADDITIONS START -->
 
     <!-- Settings Group: NavigationBar -->
