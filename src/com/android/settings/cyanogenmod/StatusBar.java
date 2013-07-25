@@ -88,7 +88,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-	int defaultColor;
+        int defaultColor;
         int intColor;
         String hexColor;
 
@@ -229,7 +229,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         if (Utils.isTablet(getActivity())) {
             mPrefCategoryGeneral.removePreference(mStatusBarBrightnessControl);
         }
-	updateBatteryIconOptions();
+        updateBatteryIconOptions();
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
