@@ -65,6 +65,8 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private static final String KEY_LOCKSCREEN_BUTTONS = "lockscreen_buttons";
     private static final String KEY_LOCK_CLOCK = "lock_clock";
     private static final String KEY_LOCKSCREEN_MAXIMIZE_WIDGETS = "lockscreen_maximize_widgets";
+    private static final String KEY_LOCKSCREEN_ALL_WIDGETS = "lockscreen_all_widgets";
+    private static final String KEY_LOCKSCREEN_DISABLE_HINTS = "lockscreen_disable_hints"; 
     private static final String KEY_LOCKSCREEN_MUSIC_CONTROLS = "lockscreen_music_controls";
     private static final String KEY_BACKGROUND = "lockscreen_background";
     private static final String KEY_SCREEN_SECURITY = "screen_security";
@@ -77,6 +79,9 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private ListPreference mCustomBackground;
     private ListPreference mBatteryStatus;
     private CheckBoxPreference mMaximizeWidgets;
+    private CheckBoxPreference mAllWidgets;
+    private CheckBoxPreference mLockscreenHints; 
+    private CheckBoxPreference mMusicControls;
     private CheckBoxPreference mEnableWidgets;
     private CheckBoxPreference mEnableCamera;
 
@@ -114,6 +119,17 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
             } else {
                 mMaximizeWidgets.setOnPreferenceChangeListener(this);
             }
+
+            mAllWidgets = (CheckBoxPreference) findPreference(KEY_LOCKSCREEN_ALL_WIDGETS);
+            mAllWidgets.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.KG_ALL_WIDGETS, 1) == 1);
+
+            mLockscreenHints = (CheckBoxPreference)findPreference(KEY_LOCKSCREEN_DISABLE_HINTS);
+            mLockscreenHints.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.LOCKSCREEN_DISABLE_HINTS, 0) == 1);
+
+            mMusicControls = (CheckBoxPreference) findPreference(KEY_LOCKSCREEN_MUSIC_CONTROLS);
+            mMusicControls.setOnPreferenceChangeListener(this);
 
             PreferenceScreen lockscreenButtons = (PreferenceScreen) findPreference(KEY_LOCKSCREEN_BUTTONS);
             if (!hasButtons()) {
@@ -210,6 +226,20 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
             Toast.makeText(getActivity(),
                     getResources().getString(hintId), Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == mAllWidgets) {
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.KG_ALL_WIDGETS, mAllWidgets.isChecked() ? 1 : 0);
+            return true;
+        } else if (preference == mLockscreenHints) {
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.LOCKSCREEN_DISABLE_HINTS, mLockscreenHints.isChecked() ? 1 : 0);
+            return true; 
+        }
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     @Override

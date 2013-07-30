@@ -16,18 +16,23 @@
 
 package com.android.settings.cyanogenmod;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.view.WindowManagerGlobal;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-public class PowerMenu extends SettingsPreferenceFragment {
+public class PowerMenu extends SettingsPreferenceFragment implements
+                   OnPreferenceChangeListener {
     private static final String TAG = "PowerMenu";
 
     private static final String KEY_REBOOT = "power_menu_reboot";
@@ -41,7 +46,7 @@ public class PowerMenu extends SettingsPreferenceFragment {
     private CheckBoxPreference mRebootPref;
     private CheckBoxPreference mScreenshotPref;
     private CheckBoxPreference mExpandedDesktopPref;
-    private CheckBoxPreference mProfilesPref;
+    private ListPreference mProfilesPref;
     private CheckBoxPreference mAirplanePref;
     private CheckBoxPreference mUserPref;
     private CheckBoxPreference mSoundPref;
@@ -51,6 +56,8 @@ public class PowerMenu extends SettingsPreferenceFragment {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.power_menu_settings);
+
+        PreferenceScreen prefSet = getPreferenceScreen();
 
         mRebootPref = (CheckBoxPreference) findPreference(KEY_REBOOT);
         mRebootPref.setChecked((Settings.System.getInt(getContentResolver(),
@@ -68,9 +75,13 @@ public class PowerMenu extends SettingsPreferenceFragment {
                 Settings.System.EXPANDED_DESKTOP_STYLE, 0) != 0;
         mExpandedDesktopPref.setEnabled(enabled);
 
-        mProfilesPref = (CheckBoxPreference) findPreference(KEY_PROFILES);
-        mProfilesPref.setChecked((Settings.System.getInt(getContentResolver(),
-                Settings.System.POWER_MENU_PROFILES_ENABLED, 1) == 1));
+        mProfilesPref = (ListPreference) findPreference(KEY_PROFILES);
+        mProfilesPref.setOnPreferenceChangeListener(this);
+        int mProfileShow = Settings.System.getInt(getContentResolver(),
+                Settings.System.POWER_MENU_PROFILES_ENABLED, 1);
+        mProfilesPref.setValue(String.valueOf(mProfileShow));
+        mProfilesPref.setSummary(mProfilesPref.getEntries()[mProfileShow]);
+
         // Only enable if System Profiles are also enabled
         enabled = Settings.System.getInt(getContentResolver(),
                 Settings.System.SYSTEM_PROFILES_ENABLED, 1) == 1;
@@ -95,6 +106,18 @@ public class PowerMenu extends SettingsPreferenceFragment {
 
     }
 
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mProfilesPref) {
+            int mProfileShow = Integer.valueOf((String) newValue);
+            int index = mProfilesPref.findIndexOfValue((String) newValue);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.POWER_MENU_PROFILES_ENABLED, mProfileShow);
+            mProfilesPref.setSummary(mProfilesPref.getEntries()[index]);
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         boolean value;
@@ -113,11 +136,6 @@ public class PowerMenu extends SettingsPreferenceFragment {
             value = mRebootPref.isChecked();
             Settings.System.putInt(getContentResolver(),
                     Settings.System.POWER_MENU_REBOOT_ENABLED,
-                    value ? 1 : 0);
-        } else if (preference == mProfilesPref) {
-            value = mProfilesPref.isChecked();
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.POWER_MENU_PROFILES_ENABLED,
                     value ? 1 : 0);
        } else if (preference == mAirplanePref) {
             value = mAirplanePref.isChecked();

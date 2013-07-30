@@ -16,6 +16,7 @@
 
 package com.android.settings.cyanogenmod;
 
+import java.io.File; 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -36,6 +37,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
@@ -63,11 +65,17 @@ public class PowerWidget extends SettingsPreferenceFragment implements
     private static final String UI_EXP_WIDGET_HIDE_ONCHANGE = "expanded_hide_onchange";
     private static final String UI_EXP_WIDGET_HIDE_SCROLLBAR = "expanded_hide_scrollbar";
     private static final String UI_EXP_WIDGET_HAPTIC_FEEDBACK = "expanded_haptic_feedback";
+    private static final String KEY_NOTIFICATION_BEHAVIOUR = "notifications_behaviour";
+    private static final String PREF_BRIGHTNESS_LOC = "brightness_location";
+    public static final String FAST_CHARGE_DIR = "/sys/kernel/fast_charge";
+    public static final String FAST_CHARGE_FILE = "force_fast_charge"; 
 
     private CheckBoxPreference mPowerWidget;
     private CheckBoxPreference mPowerWidgetHideOnChange;
     private CheckBoxPreference mPowerWidgetHideScrollBar;
     private ListPreference mPowerWidgetHapticFeedback;
+    ListPreference mNotificationsBehavior;
+    private ListPreference mBrightnessLocation;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -101,6 +109,17 @@ public class PowerWidget extends SettingsPreferenceFragment implements
             mPowerWidgetHapticFeedback.setValue(Integer.toString(Settings.System.getInt(
                     getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.EXPANDED_HAPTIC_FEEDBACK, 2)));
+            int CurrentBehavior = Settings.System.getInt(getContentResolver(), Settings.System.NOTIFICATIONS_BEHAVIOUR, 0);
+            mNotificationsBehavior = (ListPreference) findPreference(KEY_NOTIFICATION_BEHAVIOUR);
+            mNotificationsBehavior.setValue(String.valueOf(CurrentBehavior));
+            mNotificationsBehavior.setSummary(mNotificationsBehavior.getEntry());
+            mNotificationsBehavior.setOnPreferenceChangeListener(this); 
+
+            mBrightnessLocation = (ListPreference) findPreference(PREF_BRIGHTNESS_LOC);
+            mBrightnessLocation.setOnPreferenceChangeListener(this);
+            mBrightnessLocation.setValue(Integer.toString(Settings.System.getInt(getActivity()
+                    .getContentResolver(), Settings.System.STATUSBAR_TOGGLES_BRIGHTNESS_LOC, 3)));
+            mBrightnessLocation.setSummary(mBrightnessLocation.getEntry());
         }
     }
 
@@ -112,7 +131,21 @@ public class PowerWidget extends SettingsPreferenceFragment implements
                     Settings.System.EXPANDED_HAPTIC_FEEDBACK, intValue);
             mPowerWidgetHapticFeedback.setSummary(mPowerWidgetHapticFeedback.getEntries()[index]);
             return true;
-        }
+        } else if (preference == mNotificationsBehavior) {
+            String val = (String) newValue;
+                     Settings.System.putInt(getContentResolver(), Settings.System.NOTIFICATIONS_BEHAVIOUR,
+            Integer.valueOf(val));
+            int index = mNotificationsBehavior.findIndexOfValue(val);
+            mNotificationsBehavior.setSummary(mNotificationsBehavior.getEntries()[index]);
+            return true;
+        } else if (preference == mBrightnessLocation) {
+            int val = Integer.parseInt((String) newValue);
+            int index = mBrightnessLocation.findIndexOfValue((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+            Settings.System.STATUSBAR_TOGGLES_BRIGHTNESS_LOC, val);
+            mBrightnessLocation.setSummary(mBrightnessLocation.getEntries()[index]);
+            return true;
+        } 
         return false;
     }
 
@@ -252,6 +285,13 @@ public class PowerWidget extends SettingsPreferenceFragment implements
                 PowerWidgetUtil.BUTTONS.remove(PowerWidgetUtil.BUTTON_WIFIAP);
                 prefButtonsModes.removePreference(mNetworkMode);
             }
+
+            // Dont show fast charge option if not supported
+            File fastcharge = new File(FAST_CHARGE_DIR, FAST_CHARGE_FILE);
+            if (!fastcharge.exists()) {
+                PowerWidgetUtil.BUTTONS.remove(PowerWidgetUtil.BUTTON_FCHARGE);
+            }
+
 
             // fill that checkbox map!
             for (PowerWidgetUtil.ButtonInfo button : PowerWidgetUtil.BUTTONS.values()) {
