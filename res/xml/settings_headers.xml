@@ -233,6 +233,12 @@
         android:icon="@drawable/ic_settings_accessibility"
         android:title="@string/accessibility_settings" />
 
+    <!-- App Ops -->
+    <header
+        android:id="@+id/application_settings"
+        android:icon="@drawable/ic_privacy_guard"
+        android:title="@string/app_ops_settings" />
+
     <!-- Development -->
     <header
         android:id="@+id/development_settings"
