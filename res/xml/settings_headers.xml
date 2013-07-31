@@ -75,6 +75,12 @@
         android:title="@string/lock_screen_title"
         android:icon="@drawable/ic_settings_lockscreen" />
 
+    <!-- TRDS -->
+    <header
+        android:id="@+id/trds_settings"
+        android:icon="@drawable/ic_settings_trds"
+        android:title="@string/trds_settings_title" />
+
     <!-- Themes -->
     <header
         android:id="@+id/themes_settings"
@@ -226,6 +232,12 @@
         android:fragment="com.android.settings.AccessibilitySettings"
         android:icon="@drawable/ic_settings_accessibility"
         android:title="@string/accessibility_settings" />
+
+    <!-- App Ops -->
+    <header
+        android:id="@+id/application_settings"
+        android:icon="@drawable/ic_privacy_guard"
+        android:title="@string/app_ops_settings" />
 
     <!-- Development -->
     <header

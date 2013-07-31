@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2013 Dark Jelly
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- System settings -->
+
+    <!-- Color Picker -->
+    <string name="dialog_color_picker">Color Picker</string>
+    <string name="press_color_to_apply">Press on color below to apply</string>
+    <string name="arrow_right">→</string>
+    <string name="arrow_down">↓</string>
+    <string name="hex">Hex:</string>
+    <string name="hex_hint">#ff000000</string>
+    <string name="set">Set</string>
+
+    <!-- Global used strings  -->
+    <string name="style_title">Style</string>
+    <string name="cat_style_title">Style</string>
+    <string name="background_title">Background</string>
+    <string name="color_title">Color</string>
+    <string name="transparency_title">Transparency</string>
+    <string name="style_reset">Reset</string>
+
+    <!-- Statusbar -->
+
+    <!-- Statusbar style strings  -->
+    <string name="status_bar_battery_status_style_title">Battery status</string>
+    <string name="status_bar_battery_bar_style_title">Battery bar</string>
+
+    <!-- Statusbar style background strings  -->
+    <string name="status_bar_alpha_mode_dialog_text_title">Show status bar transparency</string>
+    <string name="status_bar_alpha_mode_text_title">Transparency mode</string>
+    <string name="status_bar_alpha_mode_home">On launcher</string>
+    <string name="status_bar_alpha_mode_default">On launcher and keyguard</string>
+    <string name="status_bar_alpha_mode_always">Always</string>
+
+    <!-- Statusbar style battery status strings  -->
+    <string name="status_bar_battery_status_style_title">Battery status</string>
+    <string name="style_reset_battery_status">Reset battery status</string>
+    <string name="battery_status_style_title">Icon&#47;text</string>
+    <string name="status_bar_battery_status_percentage">Percentage (Slimroms)</string>
+    <string name="status_bar_battery_status_icon_percentage">Icon &amp; Percentage</string>
+    <string name="status_bar_battery_status_circle">Circle (CM)</string>
+    <string name="status_bar_battery_status_circle_percentage">Circle &amp; percentage (CM)</string>
+    <string name="status_bar_battery_status_ABT">Circle (AlphaBlue Theme)</string>
+    <string name="status_bar_battery_status_AOKP">Circle (AOKP)</string>
+    <string name="status_bar_battery_status_HC">Circle (HoneyComb)</string>
+    <string name="battery_status_circle_dotted_title">Circle dotted (Slimroms)</string>
+    <string name="battery_status_circle_dotted_summary">Activate, to show the battery circle dotted</string>
+    <string name="circle_battery_color">Circle color</string>
+    <string name="battery_text_color">Percentage text color</string>
+    <string name="battery_text_charging_color">Percentage text charging color</string>
+    <string name="circle_battery_animation_speed">Circle animation speed</string>
+    <string name="circle_battery_animation_speed_none">None</string>
+    <string name="circle_battery_animation_speed_slow">Slow</string>
+    <string name="circle_battery_animation_speed_stock">Normal</string>
+    <string name="circle_battery_animation_speed_fast">Fast</string> 
+
+    <!-- Statusbar style battery bar style strings  -->
+    <string name="status_bar_battery_bar_style_title">Battery bar</string>
+    <string name="style_reset_battery_bar">Reset battery bar</string>
+    <string name="battery_bar_position_title">Position</string>
+    <string name="battery_bar_center_summary">Display the battery bar center-mirrored</string>
+    <string name="battery_bar_center_title">Center-mirrored</string>
+    <string name="battery_bar_animate_title">Charging animation</string>
+    <string name="battery_bar_animate_summary">The charging animation may result in a poor user experience. Enable at your own discretion.</string> 
+    <string name="battery_bar_thickness_title">Thickness</string>
+    <string name="battery_bar_statusbar">Statusbar</string>
+    <string name="battery_bar_navbar_top">Top of navigation bar</string>
+    <string name="battery_bar_navbar_buttom">Buttom of navigation bar</string>
+    <string name="battery_bar_thickness_1">1dp (default)</string>
+    <string name="battery_bar_thickness_2">2dp</string>
+    <string name="battery_bar_thickness_3">3dp</string>
+    <string name="battery_bar_thickness_4">4dp</string>
+
+    <!-- Statusbar style clock style strings  -->
+    <string name="status_bar_clock_style_title">Clock</string>
+    <string name="status_bar_clock_style_enabled">Showing clock</string>
+    <string name="status_bar_clock_style_disabled">Clock is hidden</string>
+    <string name="status_bar_clock_position_title">Position</string>
+    <string name="status_bar_clock_position_summary">Enabe to show the clock centered in the status bar</string>
+
+    <!-- Clock strings -->
+    <string name="status_bar_show_clock_title">Show clock</string>
+    <string name="status_bar_show_clock_summary">Enable to show the clock in the status bar</string>
+
+    <!-- Battery strings -->
+    <string name="status_bar_show_battery_status_title">Show battery status</string>
+    <string name="status_bar_show_battery_status_summary">Enable to show the battery status in the status bar</string>
+    <string name="status_bar_show_battery_bar_title">Show battery bar</string>
+    <string name="status_bar_show_battery_bar_summary">Enable to show the battery bar</string>
+
+    <!-- Statusbar expanded -->
+
+    <!-- Statusbar expanded strings -->
+    <string name="status_bar_expanded_title">Status bar expanded</string>
+    <string name="status_bar_expanded_cat_clock_date_title">Clock &amp; date</string>
+    <string name="status_bar_expanded_cat_options_title">Options</string>
+    <string name="status_bar_expanded_header_title">Header</string>
+
+    <!-- Statusbar expanded header strings -->
+    <string name="header_settings_btn_title">Settings button</string>
+    <string name="header_settings_btn_summary">Enable, to always show the settings button</string>
+
+    <!-- Notification drawer style strings -->
+    <string name="notification_cw_label_style_title">Carrier and Wifi network name</string>
+    <string name="notification_drawer_background_title">Type of the background</string>
+    <string name="notification_drawer_background_landscape_title">Different landscape background</string>
+    <string name="notification_drawer_background_color_fill">Color fill</string>
+    <string name="notification_drawer_background_custom_image">Custom image</string>
+    <string name="notification_drawer_background_default_wallpaper">Default background</string>
+    <string name="notification_drawer_background_custom_dialog_title">Choose color</string>
+    <string name="notification_drawer_background_alpha_title">Background transparency</string>
+    <string name="notification_drawer_row_alpha_title">Rows background transparency</string>
+    <string name="custom_carrier_label_title">Custom carrier label</string>
+    <string name="custom_carrier_label_explain">Please enter a new label. Leave blank to revert to stock label.</string>
+    <string name="custom_carrier_label_notset">Custom label currently not set</string>
+    <string name="notification_show_wifi_ssid_title">Wifi network name</string>
+    <string name="notification_show_wifi_ssid_summary">Enable, to show the Wifi network name</string>
+
+    <!-- General strings -->
+    <string name="general_title">General</string>
+
+    <!-- Dual pane strings -->
+    <string name="dual_pane_title">Tablet dual panel mode</string>
+    <string name="dual_pane_summary">Restart settings to take effect</string>
+
+    <!-- Ram bar strings -->
+    <string name="ram_bar">Recents RAM bar</string>
+    <string name="ram_bar_note_title">Note</string>
+    <string name="ram_bar_note_summary">This rambar shows how android is really using your available ram. Please note that having apps open in the background and cached helps for your device to open your apps faster.</string>
+    <string name="ram_bar_mode_title">Recents RAM bar mode</string>
+    <string name="ram_bar_mode_dialog_title">Show on recents RAM bar</string>
+    <string name="ram_bar_none">None</string>
+    <string name="ram_bar_apps">Applications</string>
+    <string name="ram_bar_cache">Applications and cache</string>
+    <string name="ram_bar_other">Applications, cache and other</string>
+    <string name="ram_bar_style_cat">Recents RAM bar style</string>
+    <string name="ram_bar_color_app_mem_color">Applications RAM color</string>
+    <string name="ram_bar_color_cache_mem_color">Cache RAM color</string>
+    <string name="ram_bar_color_total_mem_color">Other RAM color</string>
+    <string name="ram_bar_color_enabled">Enabled</string>
+    <string name="ram_bar_color_disabled">Disabled</string>
+    <string name="ram_bar_button_reset">Reset colors</string>
+
+    <!-- Navigation strings -->
+    <string name="navigation_title">Navigation</string>
+    <string name="navigation_summary">Customize the Navigation bar &amp;\nPie controls</string>
+    <string name="cat_nav_ring">Navigation ring</string>
+    <string name="cat_pie_control">Pie</string>
+
+    <!-- Navigation bar style strings -->
+    <string name="navigation_bar_height_title">Height</string>
+    <string name="navigation_bar_height_48">48dp (default)</string>
+    <string name="navigation_bar_height_44">44dp</string>
+    <string name="navigation_bar_height_40">40dp</string>
+    <string name="navigation_bar_height_36">36dp</string>
+    <string name="navigation_bar_height_32">32dp</string>
+    <string name="navigation_bar_height_28">28dp</string>
+    <string name="navigation_bar_height_24">24dp</string>
+
+    <!-- Navigation bar strings -->
+    <string name="navigation_bar_title">Navigation bar</string>
+    <string name="navigation_bar_edit_title">Navigation bar customization</string>
+    <string name="navigation_bar_edit_summary">Edit buttons layout</string>
+
+    <!-- Wake up options settings -->
+
+    <!-- Wake up options strings -->
+    <string name="wakeup_options_title">Wakeup options</string>
+
+    <!-- (Un)plug screen wake up strings -->
+    <string name="plugged_unplugged_wake_title">Charger</string>
+    <string name="plugged_unplugged_wake_summary">Plugging/unplogging the charger will wake the device.</string>
+
+    <!-- Device info settings -->
+
+    <!-- Change Log strings -->
+    <string name="changelog_summary">CyanogenMod Changelog</string>
+    <string name="djechangelog_summary">Dark Jelly Edition Changelog</string>
+
+    <!-- Section strings -->
+    <string name="general_info_section_title">General</string>
+    <string name="cm_section_title">CyanogenMod</string>
+	<string name="dje_section_title">Dark Jelly Edition</string>
+	<string name="hw_section_title">Hardware</string>
+	<string name="sw_section_title">Software</string>
+
+    <!-- OTA update strings -->
+    <string name="update_me_app_settings_title">OTA Update (launch UpdateMeApp)</string>
+    <string name="update_me_app_settings_summary">Dark Jelly Edition Updates</string>
+
+    <!-- Build version strings -->
+    <string name="build_version">Build version</string>
+</resources>
+

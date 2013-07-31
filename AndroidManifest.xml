@@ -1604,6 +1604,9 @@
             android:theme="@style/CryptKeeperBlankTheme"
         />
 
+        <activity android:name=".cyanogenmod.StatusBarStyle" />
+        <activity android:name=".cyanogenmod.NavBarStyle" />
+
         <!-- CyanogenMod activities Start -->
         <activity android:name=".cyanogenmod.SystemSettings" />
         <activity android:name="Settings$SystemSettingsActivity"
@@ -1692,6 +1695,10 @@
 
         <activity android:name=".cyanogenmod.QuickSettings" />
 
+        <activity android:name=".cyanogenmod.StatusBar" />
+
+        <activity android:name=".cyanogenmod.StatusBarClockStyle" />
+
         <activity android:name=".profiles.NFCProfile"
                 android:theme="@android:style/Theme.NoDisplay">
             <intent-filter>
@@ -1723,7 +1730,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.app.action.START_ENCRYPTION" />
-                <category android:name="android.intent.category.DEFAULT" /> />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.CryptKeeperSettings" />

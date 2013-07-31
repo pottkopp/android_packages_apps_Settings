@@ -311,6 +311,7 @@
     <string name="display_rotation_title">Rotace</string>
     <string name="display_rotation_disabled">Zakázáno.</string>
     <string name="display_rotation_unit">stupně</string>
+    <string name="display_lockscreen_rotation_title">Rotovat obrazovku zámku</string>
     <string name="display_rotation_category_title">Režim rotace</string>
     <string name="display_rotation_0_title">0 stupňů</string>
     <string name="display_rotation_90_title">90 stupňů</string>

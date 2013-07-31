@@ -16,6 +16,7 @@
 
 package com.android.settings.profiles;
 
+import static com.android.internal.util.cm.QSUtils.deviceSupportsNfc;
 import static com.android.internal.util.cm.QSUtils.*;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.media.AudioManager;
 import android.net.wimax.WimaxHelper;
 import android.os.Bundle;

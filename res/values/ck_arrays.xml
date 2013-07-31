@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012-2013 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+   <string-array name="clock_style_entries" translatable="false">
+        <item>@string/right_clock</item>
+        <item>@string/center_clock</item>
+    </string-array>
+  
+    <string-array name="clock_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array> 
+
+    <string-array name="clock_date_display_entries">
+        <item>Don\'t show</item>
+        <item>Small date</item>
+        <item>Regular date</item>
+    </string-array>
+
+    <string-array name="clock_date_display_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="clock_date_style_entries">
+        <item>Normal</item>
+        <item>Lowercase</item>
+        <item>Uppercase</item>
+    </string-array>
+
+    <string-array name="clock_date_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="clock_date_format_entries">
+        <item>dd/MM/yy</item>
+        <item>MM/dd/yy</item>
+        <item>yyyy-MM-dd</item>
+        <item>yyyy-dd-MM</item>
+        <item>dd-MM-yyyy</item>
+        <item>MM-dd-yyyy</item>
+        <item>MMM dd</item>
+        <item>MMM dd, yyyy</item>
+        <item>MMMM dd, yyyy</item>
+        <item>EEE</item>
+        <item>EEE dd</item>
+        <item>EEE dd/MM</item>
+        <item>EEE MM/dd</item>
+        <item>EEE dd MMM</item>
+        <item>EEE MMM dd</item>
+        <item>EEE MMMM dd</item>
+        <item>EEEE dd/MM</item>
+        <item>EEEE MM/dd</item>
+        <item>Custom java format</item>
+    </string-array>
+
+    <string-array name="clock_date_format_values">
+        <item>dd/MM/yy</item>
+        <item>MM/dd/yy</item>
+        <item>yyyy-MM-dd</item>
+        <item>yyyy-dd-MM</item>
+        <item>dd-MM-yyyy</item>
+        <item>MM-dd-yyyy</item>
+        <item>MMM dd</item>
+        <item>MMM dd, yyyy</item>
+        <item>MMMM dd, yyyy</item>
+        <item>EEE</item>
+        <item>EEE dd</item>
+        <item>EEE dd/MM</item>
+        <item>EEE MM/dd</item>
+        <item>EEE dd MMM</item>
+        <item>EEE MMM dd</item>
+        <item>EEE MMMM dd</item>
+        <item>EEEE dd/MM</item>
+        <item>EEEE MM/dd</item>
+        <item>Custom java format</item>
+    </string-array>
+
+   <string-array name="circle_battery_animation_speed_entries" >
+        <item>@string/circle_battery_animation_speed_none</item>
+        <item>@string/circle_battery_animation_speed_slow</item>
+        <item>@string/circle_battery_animation_speed_stock</item>
+        <item>@string/circle_battery_animation_speed_fast</item>
+    </string-array>
+
+    <string-array name="circle_battery_animation_speed_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>3</item>
+        <item>5</item>
+    </string-array>
+
+    <!-- AutoHide StatusBar -->
+    <string-array name="entries_auto_hide_statusbar">
+        <item>@string/auto_hide_statusbar_off</item>
+        <item>@string/auto_hide_statusbar_nonperm</item>
+        <item>@string/auto_hide_statusbar_all</item>
+    </string-array>
+
+    <string-array name="values_auto_hide_statusbar" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!--- Navigation bar height -->
+    <string-array name="navigation_bar_height_entries" translatable="false"> 
+        <item>@string/navigation_bar_height_48</item>
+        <item>@string/navigation_bar_height_47</item>
+        <item>@string/navigation_bar_height_46</item>
+        <item>@string/navigation_bar_height_45</item>
+        <item>@string/navigation_bar_height_44</item>
+        <item>@string/navigation_bar_height_43</item>
+        <item>@string/navigation_bar_height_42</item>
+        <item>@string/navigation_bar_height_41</item>
+        <item>@string/navigation_bar_height_40</item>
+        <item>@string/navigation_bar_height_39</item>
+        <item>@string/navigation_bar_height_38</item>
+        <item>@string/navigation_bar_height_37</item>
+        <item>@string/navigation_bar_height_36</item>
+        <item>@string/navigation_bar_height_35</item>
+        <item>@string/navigation_bar_height_34</item>
+        <item>@string/navigation_bar_height_33</item>
+        <item>@string/navigation_bar_height_32</item>
+        <item>@string/navigation_bar_height_31</item>
+        <item>@string/navigation_bar_height_30</item>
+        <item>@string/navigation_bar_height_29</item>
+        <item>@string/navigation_bar_height_28</item>
+        <item>@string/navigation_bar_height_27</item>
+        <item>@string/navigation_bar_height_26</item>
+        <item>@string/navigation_bar_height_25</item>
+        <item>@string/navigation_bar_height_24</item>
+        <item>@string/navigation_bar_height_23</item>
+        <item>@string/navigation_bar_height_22</item>
+        <item>@string/navigation_bar_height_21</item>
+        <item>@string/navigation_bar_height_20</item>
+    </string-array>
+
+    <string-array name="navigation_bar_height_values" translatable="false"> 
+        <item>48</item>
+        <item>47</item>
+        <item>46</item>
+        <item>45</item>
+        <item>44</item>
+        <item>43</item>
+        <item>42</item>
+        <item>41</item>
+        <item>40</item>
+        <item>39</item>
+        <item>38</item>
+        <item>37</item>
+        <item>36</item>
+        <item>35</item>
+        <item>34</item>
+        <item>33</item>
+        <item>32</item>
+        <item>31</item>
+        <item>30</item>
+        <item>29</item>
+        <item>28</item>
+        <item>27</item>
+        <item>26</item>
+        <item>25</item>
+        <item>24</item>
+        <item>23</item>
+        <item>22</item>
+        <item>21</item>
+        <item>20</item>
+    </string-array>
+
+    <!-- Fullscreen Statusbar Timeout -->
+    <string-array name="fullscreen_statusbar_timeout_entries" translatable="false">
+        <item>2.5 seconds</item>
+        <item>5 seconds</item>
+        <item>7.5 seconds</item>
+        <item>10 seconds</item>
+    </string-array>
+    <string-array name="fullscreen_statusbar_timeout_values" translatable="false">
+        <item>2500</item>
+        <item>5000</item>
+        <item>7500</item>
+        <item>10000</item>
+    </string-array> 
+
+    <!-- Interface : App sidebar **START** -->
+    <string-array name="app_sidebar_position_entries" translatable="false">
+        <item>@string/app_sidebar_position_left</item>
+        <item>@string/app_sidebar_position_right</item>
+    </string-array>
+    <string-array name="app_sidebar_position_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="tab_position_entries">
+        <item>Top</item>
+        <item>Middle</item>
+        <item>Bottom</item>
+    </string-array>
+    <string-array name="tab_position_entryValues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="tab_size_entries">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </string-array>
+    <string-array name="tab_size_entryValues">
+        <item>1.0</item>
+        <item>1.5</item>
+        <item>2.0</item>
+    </string-array>
+    <!-- Interface : App sidebar **END** -->
+
+    <!-- NFC settings. -->
+    <string-array name="nfc_polling_mode_entries">
+       <item>@string/nfc_polling_mode_screen_off</item>
+       <item>@string/nfc_polling_mode_screen_locked</item>
+       <item>@string/nfc_polling_mode_screen_unlocked</item>
+    </string-array>
+
+    <string-array name="nfc_polling_mode_values">
+       <item>1</item>
+       <item>2</item>
+       <item>3</item>
+    </string-array> 
+
+    <!-- Low battery warning policy -->
+    <string-array name="pref_low_battery_warning_policy_entries">
+        <item>@string/low_battery_warning_policy_popup_sound</item>
+        <item>@string/low_battery_warning_policy_notif_sound</item>
+        <item>@string/low_battery_warning_policy_popup</item>
+        <item>@string/low_battery_warning_policy_notif</item>
+        <item>@string/low_battery_warning_policy_sound</item>
+        <item>@string/low_battery_warning_policy_disabled</item>
+    </string-array>
+
+    <string-array name="pref_low_battery_warning_policy_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array> 
+
+    <!-- Notification behavior preferences -->
+    <string-array name="notifs_beh_entries">
+        <item>Normal</item>
+        <item>Never expand</item>
+        <item>Always expand</item>
+        <item>Old style</item>
+    </string-array>
+    <string-array name="notifs_beh_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array> 
+
+    <string-array name="entries_halo_state">
+        <item>@string/halo_state_black</item>
+        <item>@string/halo_state_white</item>
+    </string-array>
+
+    <string-array name="values_halo_state" translatable="false">
+        <item>1</item>
+        <item>0</item>
+    </string-array> 
+
+    <string-array name="entries_halo_size">
+        <item>@string/halo_size_miniscule</item>
+        <item>@string/halo_size_small</item>
+        <item>@string/halo_size_default</item>
+        <item>@string/halo_size_large</item>
+        <item>@string/halo_size_gigantic</item>
+        <item>@string/halo_size_monster</item>
+    </string-array>
+
+    <string-array name="values_halo_size" translatable="false">
+        <item>0.6</item>
+        <item>0.8</item>
+        <item>1.0</item>
+        <item>1.2</item>
+        <item>1.4</item>
+        <item>1.6</item>
+    </string-array> 
+
+    <!-- Profiles -->
+    <string-array name="power_menu_profiles_entries">
+        <item>@string/power_menu_profiles_disabled</item>
+        <item>@string/power_menu_profiles_lock</item>
+        <item>@string/power_menu_profiles_all</item>
+    </string-array>
+
+    <string-array name="power_menu_profiles_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array> 
+
+    <string-array name="ram_bar_mode_entries">
+        <item>@string/ram_bar_none</item>
+        <item>@string/ram_bar_apps</item>
+        <item>@string/ram_bar_cache</item>
+        <item>@string/ram_bar_other</item>
+    </string-array> 
+
+    <string-array name="ram_bar_mode_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>  
+
+    <!-- Clear Recents position -->
+    <string-array name="clear_recents_position_entries" translatable="false">
+        <item>@string/clear_recents_position_left</item>
+        <item>@string/clear_recents_position_right</item>
+    </string-array>
+    <string-array name="clear_recents_position_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array> 
+
+    <!-- Navigation Bar alpha mode-->
+    <string-array name="entries_nav_bar_alpha_mode">
+        <item>@string/nav_bar_alpha_mode_home</item>
+        <item>@string/nav_bar_alpha_mode_default</item>
+        <item>@string/nav_bar_alpha_mode_always</item>
+    </string-array>
+
+    <string-array name="values_nav_bar_alpha_mode" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Status Bar alpha mode-->
+    <string-array name="entries_status_bar_alpha_mode">
+        <item>@string/status_bar_alpha_mode_home</item>
+        <item>@string/status_bar_alpha_mode_default</item>
+        <item>@string/status_bar_alpha_mode_always</item>
+    </string-array>
+
+    <string-array name="values_status_bar_alpha_mode" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="battery_bar_entries">
+        <item>Hide</item>
+        <item>Statusbar</item>
+        <item>Top of navbar</item>
+        <item>Bottom of navbar</item>
+    </string-array>
+
+    <string-array name="battery_bar_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="battery_bar_style_entries">
+        <item>Regular</item>
+        <item>Center-mirrored</item>
+    </string-array>
+
+    <string-array name="battery_bar_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="battery_bar_thickness_entries">
+        <item>1 dp</item>
+        <item>2 dp</item>
+        <item>3 dp</item>
+        <item>4 dp</item>
+    </string-array>
+
+    <string-array name="battery_bar_thickness_values" translatable="false">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+</resources>
