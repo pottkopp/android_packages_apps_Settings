@@ -105,8 +105,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mCircleColor.setOnPreferenceChangeListener(this);
         defaultColor = getResources().getColor(
                 com.android.internal.R.color.holo_blue_dark);
-        intColor = Settings.System.getInt(getActivity().getContentResolver(),
-                    Settings.System.STATUS_BAR_CIRCLE_BATTERY_COLOR, defaultColor);
+        intColor = Settings.System.getInt(resolver, Settings.System.STATUS_BAR_CIRCLE_BATTERY_COLOR, defaultColor);
         hexColor = String.format("#%08x", (0xffffffff & intColor));
         mCircleColor.setSummary(hexColor);
 
@@ -114,16 +113,14 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mCircleTextColor.setOnPreferenceChangeListener(this);
         defaultColor = getResources().getColor(
                 com.android.internal.R.color.holo_blue_dark);
-        intColor = Settings.System.getInt(getActivity().getContentResolver(),
-                    Settings.System.STATUS_BAR_CIRCLE_BATTERY_TEXT_COLOR, defaultColor);
+        intColor = Settings.System.getInt(resolver, Settings.System.STATUS_BAR_CIRCLE_BATTERY_TEXT_COLOR, defaultColor);
         hexColor = String.format("#%08x", (0xffffffff & intColor));
         mCircleTextColor.setSummary(hexColor);
 
         mCircleAnimSpeed = (ListPreference) findPreference(PREF_STATUS_BAR_CIRCLE_BATTERY_ANIMATIONSPEED);
         mCircleAnimSpeed.setOnPreferenceChangeListener(this);
         mCircleAnimSpeed.setValue((Settings.System
-                .getInt(getActivity().getContentResolver(),
-                        Settings.System.STATUS_BAR_CIRCLE_BATTERY_ANIMATIONSPEED, 3))
+                .getInt(resolver, Settings.System.STATUS_BAR_CIRCLE_BATTERY_ANIMATIONSPEED, 3))
                 + "");
         mCircleAnimSpeed.setSummary(mCircleAnimSpeed.getEntry());
 
@@ -168,52 +165,37 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
 
         mBatteryBar = (ListPreference) findPreference(PREF_BATT_BAR);
         mBatteryBar.setOnPreferenceChangeListener(this);
-        mBatteryBar.setValue((Settings.System
-                .getInt(getActivity().getContentResolver(),
-                        Settings.System.STATUSBAR_BATTERY_BAR, 0))
-                + "");
+        mBatteryBar.setValue((Settings.System.getInt(resolver, Settings.System.STATUSBAR_BATTERY_BAR, 0)) + "");
 
         mBatteryBarStyle = (ListPreference) findPreference(PREF_BATT_BAR_STYLE);
         mBatteryBarStyle.setOnPreferenceChangeListener(this);
-        mBatteryBarStyle.setValue((Settings.System.getInt(getActivity()
-                .getContentResolver(),
-                Settings.System.STATUSBAR_BATTERY_BAR_STYLE, 0))
-                + "");
+        mBatteryBarStyle.setValue((Settings.System.getInt(resolver, Settings.System.STATUSBAR_BATTERY_BAR_STYLE, 0)) + "");
 
         mBatteryBarColor = (ColorPickerPreference) findPreference(PREF_BATT_BAR_COLOR);
         mBatteryBarColor.setOnPreferenceChangeListener(this);
 
         mBatteryBarChargingAnimation = (CheckBoxPreference) findPreference(PREF_BATT_ANIMATE);
-        mBatteryBarChargingAnimation.setChecked(Settings.System.getInt(
-                getActivity().getContentResolver(),
-                Settings.System.STATUSBAR_BATTERY_BAR_ANIMATE, 0) == 1);
+        mBatteryBarChargingAnimation.setChecked(Settings.System.getInt(resolver, Settings.System.STATUSBAR_BATTERY_BAR_ANIMATE, 0) == 1);
 
         mBatteryBarThickness = (ListPreference) findPreference(PREF_BATT_BAR_WIDTH);
         mBatteryBarThickness.setOnPreferenceChangeListener(this);
-        mBatteryBarThickness.setValue((Settings.System.getInt(getActivity()
-                .getContentResolver(),
-                Settings.System.STATUSBAR_BATTERY_BAR_THICKNESS, 1))
-                + "");
+        mBatteryBarThickness.setValue((Settings.System.getInt(resolver, Settings.System.STATUSBAR_BATTERY_BAR_THICKNESS, 1)) + "");
 
         mStatusBarAutoHide = (ListPreference) findPreference(STATUS_BAR_AUTO_HIDE);
-        int statusBarAutoHideValue = Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.AUTO_HIDE_STATUSBAR, 0);
+        int statusBarAutoHideValue = Settings.System.getInt(resolver, Settings.System.AUTO_HIDE_STATUSBAR, 0);
         mStatusBarAutoHide.setValue(String.valueOf(statusBarAutoHideValue));
         updateStatusBarAutoHideSummary(statusBarAutoHideValue);
         mStatusBarAutoHide.setOnPreferenceChangeListener(this);
 
         mFullScreenStatusBar = (CheckBoxPreference)findPreference(PREF_FULLSCREEN_STATUSBAR);
-        mFullScreenStatusBar.setChecked(Settings.System.getBoolean(getActivity().getApplicationContext().getContentResolver(),
-                Settings.System.FULLSCREEN_STATUSBAR, true)); 
+        mFullScreenStatusBar.setChecked(Settings.System.getBoolean(resolver, Settings.System.FULLSCREEN_STATUSBAR, true)); 
 
         mFullScreenStatusBarTimeout = (ListPreference) findPreference(FREF_FULLSCREEN_STATUSBAR_TIMEOUT);
         mFullScreenStatusBarTimeout.setOnPreferenceChangeListener(this);
-        mFullScreenStatusBarTimeout.setValue(Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.FULLSCREEN_STATUSBAR_TIMEOUT, 10000) + ""); 
+        mFullScreenStatusBarTimeout.setValue(Settings.System.getInt(resolver, Settings.System.FULLSCREEN_STATUSBAR_TIMEOUT, 10000) + ""); 
 
         mCircleColorReset = (Preference) findPreference(PREF_CIRCLE_COLOR_RESET);
-        if (Settings.System.getInt(getActivity().getContentResolver(),
-                    Settings.System.STATUS_BAR_CIRCLE_BATTERY_RESET, 0) == 1) {
+        if (Settings.System.getInt(resolver, Settings.System.STATUS_BAR_CIRCLE_BATTERY_RESET, 0) == 1) {
             circleColorReset();
         }	
 
@@ -241,6 +223,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean result = false;
+        ContentResolver resolver = getActivity().getContentResolver();
         if (preference == mStatusBarBattery) {
             int statusBarBattery = Integer.valueOf((String) newValue);
             int index = mStatusBarBattery.findIndexOfValue((String) newValue);
@@ -254,10 +237,8 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             preference.setSummary(hex);
 
             int intHex = ColorPickerPreference.convertToColorInt(hex);
-            Settings.System.putInt(resolver,
-                    Settings.System.STATUS_BAR_CIRCLE_BATTERY_COLOR, intHex);
-            Settings.System.putInt(resolver,
-                    Settings.System.STATUS_BAR_CIRCLE_BATTERY_RESET, 0);
+            Settings.System.putInt(resolver, Settings.System.STATUS_BAR_CIRCLE_BATTERY_COLOR, intHex);
+            Settings.System.putInt(resolver, Settings.System.STATUS_BAR_CIRCLE_BATTERY_RESET, 0);
             return true;
         } else if (preference == mCircleTextColor) {
             String hex = ColorPickerPreference.convertToARGB(Integer
@@ -265,10 +246,8 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             preference.setSummary(hex);
 
             int intHex = ColorPickerPreference.convertToColorInt(hex);
-            Settings.System.putInt(resolver,
-                    Settings.System.STATUS_BAR_CIRCLE_BATTERY_TEXT_COLOR, intHex);
-            Settings.System.putInt(resolver,
-                    Settings.System.STATUS_BAR_CIRCLE_BATTERY_RESET, 0);
+            Settings.System.putInt(resolver, Settings.System.STATUS_BAR_CIRCLE_BATTERY_TEXT_COLOR, intHex);
+            Settings.System.putInt(resolver, Settings.System.STATUS_BAR_CIRCLE_BATTERY_RESET, 0);
             return true;
         } else if (preference == mStatusBarCmSignal) {
             int signalStyle = Integer.valueOf((String) newValue);
@@ -279,8 +258,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         } else if (preference == mStatusBarClock) {
             int clockStyle = Integer.parseInt((String) newValue);
             int index = mStatusBarClock.findIndexOfValue((String) newValue);
-            Settings.System.putInt(resolver,
-                Settings.System.STATUS_BAR_CLOCK, clockStyle);
+            Settings.System.putInt(resolver, Settings.System.STATUS_BAR_CLOCK, clockStyle);
             mStatusBarClock.setSummary(mStatusBarClock.getEntries()[index]);
             return true;
         } else if (preference == mBatteryBarColor) {
@@ -332,6 +310,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     }
 
     private void circleColorReset() {
+        ContentResolver resolver = getActivity().getContentResolver();
         int defaultColor = getResources().getColor(
                 com.android.internal.R.color.holo_blue_dark);
         Settings.System.putInt(resolver,
@@ -345,35 +324,36 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
 
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         boolean value;
-    if (preference == mStatusBarBrightnessControl) {
+        ContentResolver resolver = getActivity().getContentResolver();
+        if (preference == mStatusBarBrightnessControl) {
             value = mStatusBarBrightnessControl.isChecked();
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+            Settings.System.putInt(resolver,
                     Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, value ? 1 : 0);
             return true;
         } else if (preference == mStatusBarNotifCount) {
             value = mStatusBarNotifCount.isChecked();
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+            Settings.System.putInt(resolver,
                     Settings.System.STATUS_BAR_NOTIF_COUNT, value ? 1 : 0);
             return true;
         } else if (preference == mBatteryBarChargingAnimation) {
 
-            Settings.System.putInt(getActivity().getContentResolver(),
+            Settings.System.putInt(resolver,
                     Settings.System.STATUSBAR_BATTERY_BAR_ANIMATE,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
         } else if (preference == mFullScreenStatusBar) {
             value = mFullScreenStatusBar.isChecked();
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+            Settings.System.putInt(resolver,
                     Settings.System.FULLSCREEN_STATUSBAR, value ? 1 : 0);
             return true; 
         } else if (preference == mStatusBarTraffic_enable) {
             value = mStatusBarTraffic_enable.isChecked();
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+            Settings.System.putInt(resolver,
                     Settings.System.STATUS_BAR_TRAFFIC_ENABLE, value ? 1 : 0);
             return true;
         } else if (preference == mStatusBarTraffic_hide) {
             value = mStatusBarTraffic_hide.isChecked();
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+            Settings.System.putInt(resolver,
                     Settings.System.STATUS_BAR_TRAFFIC_HIDE, value ? 1 : 0);
             return true;
         }
