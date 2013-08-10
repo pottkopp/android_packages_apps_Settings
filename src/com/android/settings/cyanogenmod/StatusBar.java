@@ -98,7 +98,6 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         PreferenceScreen prefSet = getPreferenceScreen();
         ContentResolver resolver = getActivity().getContentResolver();
 
-        mStatusBarBrightnessControl = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_BRIGHTNESS_CONTROL);
         mStatusBarBattery = (ListPreference) prefSet.findPreference(STATUS_BAR_BATTERY);
 
         mCircleColor = (ColorPickerPreference) findPreference(PREF_STATUS_BAR_CIRCLE_BATTERY_COLOR);
@@ -124,11 +123,11 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
                 + "");
         mCircleAnimSpeed.setSummary(mCircleAnimSpeed.getEntry());
 
-        mStatusBarCmSignal = (ListPreference) prefSet.findPreference(STATUS_BAR_SIGNAL);
+        mStatusBarCmSignal = (ListPreference) findPreference(STATUS_BAR_SIGNAL);
 
+        mStatusBarBrightnessControl = (CheckBoxPreference) findPreference(STATUS_BAR_BRIGHTNESS_CONTROL);
         mStatusBarBrightnessControl.setChecked(Settings.System.getInt(resolver,
                 Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, 0) == 1);
-        mStatusBarBrightnessControl.setOnPreferenceChangeListener(this);
 
         try {
             if (Settings.System.getInt(resolver, Settings.System.SCREEN_BRIGHTNESS_MODE)
@@ -150,17 +149,17 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mStatusBarCmSignal.setSummary(mStatusBarCmSignal.getEntry());
         mStatusBarCmSignal.setOnPreferenceChangeListener(this);
 
-        mStatusBarNotifCount = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_NOTIF_COUNT);
+        mStatusBarNotifCount = (CheckBoxPreference) findPreference(STATUS_BAR_NOTIF_COUNT);
         mStatusBarNotifCount.setChecked(Settings.System.getInt(resolver,
                 Settings.System.STATUS_BAR_NOTIF_COUNT, 0) == 1);
         mStatusBarNotifCount.setOnPreferenceChangeListener(this);
 
-        mStatusBarTraffic_enable = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_TRAFFIC_ENABLE);
-        mStatusBarTraffic_enable.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+        mStatusBarTraffic_enable = (CheckBoxPreference) findPreference(STATUS_BAR_TRAFFIC_ENABLE);
+        mStatusBarTraffic_enable.setChecked((Settings.System.getInt(resolver,
                 Settings.System.STATUS_BAR_TRAFFIC_ENABLE, 0) == 1));
 
-        mStatusBarTraffic_hide = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_TRAFFIC_HIDE);
-        mStatusBarTraffic_hide.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+        mStatusBarTraffic_hide = (CheckBoxPreference) findPreference(STATUS_BAR_TRAFFIC_HIDE);
+        mStatusBarTraffic_hide.setChecked((Settings.System.getInt(resolver,
                 Settings.System.STATUS_BAR_TRAFFIC_HIDE, 1) == 1));
 
         mBatteryBar = (ListPreference) findPreference(PREF_BATT_BAR);
