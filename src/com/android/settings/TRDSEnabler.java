@@ -74,36 +74,4 @@ public class TRDSEnabler implements CompoundButton.OnCheckedChangeListener {
         mSwitch.setOnCheckedChangeListener(this);
         setSwitchState();
     }
-
-    private void setSwitchState() {
-        boolean enabled = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.UI_INVERTED_MODE, 1) == 2;
-        mStateMachineEvent = true;
-        mSwitch.setChecked(enabled);
-        mStateMachineEvent = false;
-    }
-
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (mStateMachineEvent) {
-            return;
-        }
-        // Handle a switch change
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.UI_INVERTED_MODE, isChecked ? 2 : 1);
-        Helpers.restartSystemUI();
-
-        ActivityManager am = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningAppProcessInfo> pids = am.getRunningAppProcesses();
-           for(int i = 0; i < pids.size(); i++) {
-               ActivityManager.RunningAppProcessInfo info = pids.get(i);
-               for (int j = 0; j < mTRDSApps.length; j++) {
-                   if(info.processName.equalsIgnoreCase(mTRDSApps[j])) {
-                        am.killBackgroundProcesses(mTRDSApps[j]);
-                   }
-               }
-           }
-        pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-        pm.goToSleep(SystemClock.uptimeMillis());
-    }
-
 }
