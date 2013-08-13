@@ -66,7 +66,7 @@ hilft, diese Anwendungen schneller zu öffnen.</string>
 
     <!-- Auto-Hide Status Bar -->
     <string name="auto_hide_statusbar">Statusleiste automatisch verstecken</string>
-    <string name="auto_hide_statusbar_summary">Statusleiste automatisch verstecken, wenn es keine Benachrichtigungen gibt.</string>
+    <string name="auto_hide_statusbar_summary_all">Statusleiste automatisch verstecken, wenn es keine Benachrichtigungen gibt.</string>
 
     <!-- Fullscreen Keyboard -->
     <string name="fullscreen_keyboard">Vollbildanzeige der Tastatur</string>
