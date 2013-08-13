@@ -644,12 +644,11 @@ public class Settings extends PreferenceActivity
         private LayoutInflater mInflater;
         
         static int getHeaderType(Header header) {
-            if (header.fragment == null && header.intent == null && header.id != R.id.trds_settings) {
+            if (header.fragment == null && header.intent == null) {
                 return HEADER_TYPE_CATEGORY;
             } else if (header.id == R.id.wifi_settings
                     || header.id == R.id.bluetooth_settings
-                    || header.id == R.id.profiles_settings
-                    || header.id == R.id.trds_settings) {
+                    || header.id == R.id.profiles_settings) {
                 return HEADER_TYPE_SWITCH;
             } else {
                 return HEADER_TYPE_NORMAL;
