@@ -16,6 +16,27 @@
 
 package com.android.settings.cyanogenmod;
 
+import static com.android.internal.util.cm.QSConstants.TILE_BLUETOOTH;
+import static com.android.internal.util.cm.QSConstants.TILE_MOBILEDATA;
+import static com.android.internal.util.cm.QSConstants.TILE_NETWORKMODE;
+import static com.android.internal.util.cm.QSConstants.TILE_NFC;
+import static com.android.internal.util.cm.QSConstants.TILE_PROFILE;
+import static com.android.internal.util.cm.QSConstants.TILE_WIFIAP;
+import static com.android.internal.util.cm.QSConstants.TILE_LTE;
+import static com.android.internal.util.cm.QSConstants.TILE_TORCH;
+import static com.android.internal.util.cm.QSConstants.TILE_FCHARGE;
+import static com.android.internal.util.cm.QSConstants.TILE_EXPANDEDDESKTOP;
+import static com.android.internal.util.cm.QSUtils.deviceSupportsBluetooth;
+import static com.android.internal.util.cm.QSUtils.deviceSupportsDockBattery;
+import static com.android.internal.util.cm.QSUtils.deviceSupportsImeSwitcher;
+import static com.android.internal.util.cm.QSUtils.deviceSupportsLte;
+import static com.android.internal.util.cm.QSUtils.deviceSupportsMobileData;
+import static com.android.internal.util.cm.QSUtils.deviceSupportsNfc;
+import static com.android.internal.util.cm.QSUtils.deviceSupportsUsbTether;
+import static com.android.internal.util.cm.QSUtils.deviceSupportsWifiDisplay;
+import static com.android.internal.util.cm.QSUtils.systemProfilesEnabled;
+import static com.android.internal.util.cm.QSUtils.expandedDesktopEnabled;
+
 import android.content.ContentResolver;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -36,6 +57,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -60,6 +82,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
     private static final String GENERAL_SETTINGS = "pref_general_settings";
     private static final String STATIC_TILES = "static_tiles";
     private static final String DYNAMIC_TILES = "pref_dynamic_tiles";
+
+    public static final String FAST_CHARGE_DIR = "/sys/kernel/fast_charge";
+    public static final String FAST_CHARGE_FILE = "force_fast_charge"; 
 
     MultiSelectListPreference mRingMode;
     ListPreference mNetworkMode;
@@ -183,6 +208,42 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
                 mStaticTiles.removePreference(mNetworkMode);
             }
         }
+
+        // Don't show the bluetooth options if not supported
+        if (!deviceSupportsBluetooth()) {
+            QuickSettingsUtil.TILES.remove(TILE_BLUETOOTH);
+        }
+
+        // Don't show the profiles tile if profiles are disabled
+        if (!systemProfilesEnabled(resolver)) {
+            QuickSettingsUtil.TILES.remove(TILE_PROFILE);
+        }
+
+        // Don't show the NFC tile if not supported
+        if (!deviceSupportsNfc(getActivity())) {
+            QuickSettingsUtil.TILES.remove(TILE_NFC);
+        }
+
+        // Don't show the LTE tile if not supported
+        if (!deviceSupportsLte(getActivity())) {
+            QuickSettingsUtil.TILES.remove(TILE_LTE);
+        }
+
+        // Don't show the Torch tile if not supported
+        if (!getResources().getBoolean(R.bool.has_led_flash)) {
+            QuickSettingsUtil.TILES.remove(TILE_TORCH);
+        }
+
+        // Dont show fast charge tile if not supported
+        File fastcharge = new File(FAST_CHARGE_DIR, FAST_CHARGE_FILE);
+        if (!fastcharge.exists()) {
+            QuickSettingsUtil.TILES.remove(TILE_FCHARGE);
+        }
+
+        // Don't show the Expanded desktop tile if expanded desktop is disabled
+        if (!expandedDesktopEnabled(resolver)) {
+            QuickSettingsUtil.TILES.remove(TILE_EXPANDEDDESKTOP);
+        }
     }
 
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
@@ -293,6 +354,8 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
         if (value == 0) {
             /* quick pulldown deactivated */
             mQuickPulldown.setSummary(res.getString(R.string.quick_pulldown_off));
+        } else if (value == 3) {
+            mQuickPulldown.setSummary(res.getString(R.string.quick_pulldown_summary_always));
         } else {
             String direction = res.getString(value == 2
                     ? R.string.quick_pulldown_summary_left

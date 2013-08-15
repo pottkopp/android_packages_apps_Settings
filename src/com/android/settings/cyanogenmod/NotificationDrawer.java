@@ -16,6 +16,7 @@
 
 package com.android.settings.cyanogenmod;
 
+import java.io.File; 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -37,6 +38,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
@@ -65,12 +67,17 @@ public class NotificationDrawer extends SettingsPreferenceFragment implements
     private static final String UI_EXP_WIDGET_HIDE_ONCHANGE = "expanded_hide_onchange";
     private static final String UI_EXP_WIDGET_HIDE_SCROLLBAR = "expanded_hide_scrollbar";
     private static final String UI_EXP_WIDGET_HAPTIC_FEEDBACK = "expanded_haptic_feedback";
+    private static final String KEY_NOTIFICATION_BEHAVIOUR = "notifications_behaviour";
+
+    public static final String FAST_CHARGE_DIR = "/sys/kernel/fast_charge";
+    public static final String FAST_CHARGE_FILE = "force_fast_charge"; 
 
     private ListPreference mCollapseOnDismiss;
     private CheckBoxPreference mPowerWidget;
     private CheckBoxPreference mPowerWidgetHideOnChange;
     private CheckBoxPreference mPowerWidgetHideScrollBar;
     private ListPreference mPowerWidgetHapticFeedback;
+    ListPreference mNotificationsBehavior;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -112,6 +119,12 @@ public class NotificationDrawer extends SettingsPreferenceFragment implements
                     Settings.System.EXPANDED_HIDE_SCROLLBAR, 0) == 1);
             mPowerWidgetHapticFeedback.setValue(Integer.toString(Settings.System.getInt(
                     resolver, Settings.System.EXPANDED_HAPTIC_FEEDBACK, 2)));
+     
+            int CurrentBehavior = Settings.System.getInt(getContentResolver(), Settings.System.NOTIFICATIONS_BEHAVIOUR, 0);
+            mNotificationsBehavior = (ListPreference) findPreference(KEY_NOTIFICATION_BEHAVIOUR);
+            mNotificationsBehavior.setValue(String.valueOf(CurrentBehavior));
+            mNotificationsBehavior.setSummary(mNotificationsBehavior.getEntry());
+            mNotificationsBehavior.setOnPreferenceChangeListener(this);
         }
     }
 
@@ -153,6 +166,38 @@ public class NotificationDrawer extends SettingsPreferenceFragment implements
                     Settings.System.EXPANDED_HAPTIC_FEEDBACK, intValue);
             mPowerWidgetHapticFeedback.setSummary(mPowerWidgetHapticFeedback.getEntries()[index]);
             return true;
+        } else if (preference == mNotificationsBehavior) {
+            String val = (String) newValue;
+                     Settings.System.putInt(getContentResolver(), Settings.System.NOTIFICATIONS_BEHAVIOUR,
+            Integer.valueOf(val));
+            int index = mNotificationsBehavior.findIndexOfValue(val);
+            mNotificationsBehavior.setSummary(mNotificationsBehavior.getEntries()[index]);
+            return true;
+        } 
+        return false;
+    }
+
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        boolean value;
+
+        if (preference == mPowerWidget) {
+            value = mPowerWidget.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.EXPANDED_VIEW_WIDGET,
+                    value ? 1 : 0);
+        } else if (preference == mPowerWidgetHideOnChange) {
+            value = mPowerWidgetHideOnChange.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.EXPANDED_HIDE_ONCHANGE,
+                    value ? 1 : 0);
+        } else if (preference == mPowerWidgetHideScrollBar) {
+            value = mPowerWidgetHideScrollBar.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.EXPANDED_HIDE_SCROLLBAR,
+                    value ? 1 : 0);
+        } else {
+            // If we didn't handle it, let preferences handle it.
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
 
         return false;
@@ -268,6 +313,13 @@ public class NotificationDrawer extends SettingsPreferenceFragment implements
                 PowerWidgetUtil.BUTTONS.remove(PowerWidgetUtil.BUTTON_WIFIAP);
                 prefButtonsModes.removePreference(mNetworkMode);
             }
+
+            // Dont show fast charge option if not supported
+            File fastcharge = new File(FAST_CHARGE_DIR, FAST_CHARGE_FILE);
+            if (!fastcharge.exists()) {
+                PowerWidgetUtil.BUTTONS.remove(PowerWidgetUtil.BUTTON_FCHARGE);
+            }
+
 
             // fill that checkbox map!
             for (PowerWidgetUtil.ButtonInfo button : PowerWidgetUtil.BUTTONS.values()) {

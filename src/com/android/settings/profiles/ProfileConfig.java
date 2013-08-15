@@ -16,6 +16,7 @@
 
 package com.android.settings.profiles;
 
+import static com.android.internal.util.cm.QSUtils.deviceSupportsNfc;
 import static com.android.internal.util.cm.QSUtils.*;
 
 import java.util.ArrayList;
