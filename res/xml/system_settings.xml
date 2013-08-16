@@ -41,7 +41,6 @@
         <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="com.cyanogenmod.lockclock"
                 android:targetClass="com.cyanogenmod.lockclock.preference.Preferences" />
-    </PreferenceScreen>
 
     <!-- App Sidebar Settings -->
     <PreferenceScreen
