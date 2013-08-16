@@ -198,6 +198,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
 
     @Override
     public void onResume() {
+        ContentResolver resolver = getActivity().getContentResolver();
         super.onResume();
         QuickSettingsUtil.updateAvailableTiles(getActivity());
 
