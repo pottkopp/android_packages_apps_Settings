@@ -70,6 +70,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private Preference mCircleColorReset;
     private ListPreference mStatusBarCmSignal;
     private ListPreference mStatusBarClock;
+    private ListPreference mStatusBarAmPm;
     private ListPreference mBatteryBar;
     private ListPreference mBatteryBarStyle;
     private ListPreference mBatteryBarThickness;
@@ -129,7 +130,6 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
 
         mStatusBarAmPm = (ListPreference) prefSet.findPreference(STATUS_BAR_AM_PM);
 
-        mStatusBarClock.setChecked(Settings.System.getInt(resolver, Settings.System.STATUS_BAR_CLOCK, 1) == 1);
         mStatusBarClock.setOnPreferenceChangeListener(this);
 
         if (DateFormat.is24HourFormat(getActivity())) {
